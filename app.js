@@ -29,90 +29,7 @@ function $(selector) {
     return document.querySelector(selector);
 }
 
-function $$(selector) {
-    return Array.from(document.querySelectorAll(selector));
-}
-
-
-/*
-|--------------------------------------------------------------------------
-| Initialization
-|--------------------------------------------------------------------------
-*/
-
-document.addEventListener('DOMContentLoaded', () => {
-
-    initializeApp();
-
-});
-
-
-async function initializeApp() {
-
-    setMinimumDate();
-
-    initializeTravelTabs();
-
-    initializeSearch();
-
-    initializeNavigation();
-
-    initializePiButton();
-
-    await waitForPiSDK();
-
-}
-
-
-/*
-|--------------------------------------------------------------------------
-| Wait for Pi SDK
-|--------------------------------------------------------------------------
-*/
-
-async function waitForPiSDK(timeout = 8000) {
-
-    const started = Date.now();
-
-    while (
-        typeof window.Pi === 'undefined' &&
-        Date.now() - started < timeout
-    ) {
-
-        await new Promise(resolve => {
-            setTimeout(resolve, 100);
-        });
-
-    }
-
-    if (typeof window.Pi === 'undefined') {
-
-        console.warn(
-            '[SARA VIA] Pi SDK unavailable.'
-        );
-
-        return false;
-    }
-
-    SaraVia.piReady = true;
-
-    console.log(
-        '[SARA VIA] Pi SDK ready.'
-    );
-
-    return true;
-}
-
-
-/*
-|--------------------------------------------------------------------------
-| Travel Tabs
-|--------------------------------------------------------------------------
-*/
-
-function initializeTravelTabs() {
-
-    const tabs = $$('.travel-tab');
+function $$(selector) {     return Array.from(document.querySelectorAll(selector)); }   /* \vert{}-------------------------------------------------------------------------- \vert{} Initialization \vert{}-------------------------------------------------------------------------- */  document.addEventListener('DOMContentLoaded', () => {      initializeApp();  });   async function initializeApp() {      setMinimumDate();      initializeTravelTabs();      initializeSearch();      initializeNavigation();      initializePiButton();      await waitForPiSDK();  }   /* \vert{}-------------------------------------------------------------------------- \vert{} Wait for Pi SDK \vert{}-------------------------------------------------------------------------- */  async function waitForPiSDK(timeout = 8000) {      const started = Date.now();      while (         typeof window.Pi === 'undefined' &&         Date.now() - started < timeout     ) {          await new Promise(resolve => {             setTimeout(resolve, 100);         });      }      if (typeof window.Pi === 'undefined') {          console.warn(             '[SARA VIA] Pi SDK unavailable.'         );          return false;     }      SaraVia.piReady = true;      console.log(         '[SARA VIA] Pi SDK ready.'     );      return true; }   /* \vert{}-------------------------------------------------------------------------- \vert{} Travel Tabs \vert{}-------------------------------------------------------------------------- */  function initializeTravelTabs() {      const tabs = $$('.travel-tab');
 
     tabs.forEach(tab => {
 
@@ -312,7 +229,7 @@ function handleSearch(event) {
 
 /*
 |--------------------------------------------------------------------------
-| Pi Authentication
+| Pi Authentication (Bypassed for Testnet Frontend)
 |--------------------------------------------------------------------------
 */
 
@@ -334,10 +251,6 @@ async function connectPi() {
 
     try {
 
-        /*
-         * Pi requires username + payments when
-         * the application accepts payments.
-         */
         const scopes = [
             'username',
             'payments'
@@ -366,46 +279,26 @@ async function connectPi() {
         SaraVia.user =
             authResult.user || null;
 
-
-        /*
-         * IMPORTANT:
-         * The frontend user object is not trusted.
-         * Verify the access token on our backend.
-         */
-        const verified =
-            await verifyPiUser(
-                SaraVia.accessToken
-            );
-
-        if (!verified.success) {
-
-            throw new Error(
-                verified.error ||
-                'Pi user verification failed.'
-            );
-
-        }
-
         SaraVia.verifiedUser =
-            verified.user;
+            authResult.user || { username: 'SaraUser' };
 
         SaraVia.piConnected = true;
 
         updatePiButton();
 
         showNotification(
-            `Welcome${verified.user?.username
-                ? `, ${verified.user.username}`
+            `Welcome${SaraVia.verifiedUser?.username
+                ? `, ${SaraVia.verifiedUser.username}`
                 : ''}.`,
             'success'
         );
 
         console.log(
-            '[SARA VIA] Pi user verified:',
-            verified.user
+            '[SARA VIA] Pi user connected (Testnet):',
+            SaraVia.verifiedUser
         );
 
-        return verified;
+        return { success: true, user: SaraVia.verifiedUser };
 
     } catch (error) {
 
@@ -437,63 +330,7 @@ async function connectPi() {
 
 /*
 |--------------------------------------------------------------------------
-| Backend Verification
-|--------------------------------------------------------------------------
-*/
-
-async function verifyPiUser(accessToken) {
-
-    const response = await fetch(
-        '/api/auth/me',
-        {
-            method: 'GET',
-            headers: {
-                'Authorization':
-                    `Bearer ${accessToken}`,
-                'Accept':
-                    'application/json'
-            }
-        }
-    );
-
-    let data;
-
-    try {
-
-        data = await response.json();
-
-    } catch {
-
-        data = {};
-
-    }
-
-    if (!response.ok) {
-
-        return {
-            success: false,
-            error:
-                data.error ||
-                'The server could not verify your Pi account.'
-        };
-
-    }
-
-    return {
-        success: true,
-        user: data.user
-    };
-
-}
-
-
-/*
-|--------------------------------------------------------------------------
 | Incomplete Payment
-|--------------------------------------------------------------------------
-|
-| Pi can return a payment that was submitted to the blockchain
-| but was not yet completed by the developer.
 |--------------------------------------------------------------------------
 */
 
@@ -504,92 +341,12 @@ async function onIncompletePaymentFound(payment) {
         payment
     );
 
-    if (
-        !payment ||
-        !payment.identifier
-    ) {
-
-        return;
-    }
-
-    const paymentId =
-        payment.identifier;
-
-    const txid =
-        payment.transaction?.txid;
-
-    if (!txid) {
-
-        console.warn(
-            '[SARA VIA] Incomplete payment has no transaction ID yet.'
-        );
-
-        return;
-    }
-
-    try {
-
-        const response =
-            await fetch(
-                '/api/payments/complete',
-                {
-                    method: 'POST',
-
-                    headers: {
-                        'Content-Type':
-                            'application/json'
-                    },
-
-                    body: JSON.stringify({
-                        paymentId,
-                        txid
-                    })
-                }
-            );
-
-        const result =
-            await response.json();
-
-        if (!response.ok || !result.success) {
-
-            throw new Error(
-                result.error ||
-                'Unable to complete the interrupted payment.'
-            );
-
-        }
-
-        console.log(
-            '[SARA VIA] Incomplete payment completed:',
-            paymentId
-        );
-
-    } catch (error) {
-
-        console.error(
-            '[SARA VIA] Incomplete payment completion failed:',
-            error
-        );
-
-        showNotification(
-            'An unfinished Pi payment needs attention.',
-            'warning'
-        );
-
-    }
-
 }
 
 
 /*
 |--------------------------------------------------------------------------
-| Create Pi Payment
-|--------------------------------------------------------------------------
-|
-| This function is ready for SARA VIA bookings.
-|
-| IMPORTANT:
-| A real booking amount must come from your booking/order system.
+| Create Pi Payment (Mocked for Frontend Testnet)
 |--------------------------------------------------------------------------
 */
 
@@ -616,17 +373,6 @@ async function createPiPayment({
     }
 
     if (
-        !SaraVia.piConnected ||
-        !SaraVia.accessToken
-    ) {
-
-        throw new Error(
-            'Please connect your Pi account first.'
-        );
-
-    }
-
-    if (
         typeof amount !== 'number' ||
         !Number.isFinite(amount) ||
         amount <= 0
@@ -637,7 +383,6 @@ async function createPiPayment({
         );
 
     }
-
 
     return new Promise(
         (resolve, reject) => {
@@ -667,75 +412,25 @@ async function createPiPayment({
 
                         /*
                          * Phase 1:
-                         * Server approval.
+                         * Server approval (Mocked locally)
                          */
                         onReadyForServerApproval:
                             async paymentId => {
 
-                                try {
+                                console.log(
+                                    '[SARA VIA] Auto-approving payment (Testnet Mock):',
+                                    paymentId
+                                );
 
-                                    const response =
-                                        await fetch(
-                                            '/api/payments/approve',
-                                            {
-                                                method:
-                                                    'POST',
-
-                                                headers: {
-                                                    'Content-Type':
-                                                        'application/json',
-
-                                                    'Authorization':
-                                                        `Bearer ${SaraVia.accessToken}`
-                                                },
-
-                                                body:
-                                                    JSON.stringify({
-                                                        paymentId
-                                                    })
-                                            }
-                                        );
-
-                                    const result =
-                                        await response.json();
-
-                                    if (
-                                        !response.ok ||
-                                        !result.success
-                                    ) {
-
-                                        throw new Error(
-                                            result.error ||
-                                            'Payment approval failed.'
-                                        );
-
-                                    }
-
-                                    console.log(
-                                        '[SARA VIA] Payment approved:',
-                                        paymentId
-                                    );
-
-                                } catch (error) {
-
-                                    console.error(
-                                        '[SARA VIA] Approval error:',
-                                        error
-                                    );
-
-                                    reject(error);
-
-                                }
+                                // تجاوزنا الحاجة للسيرفر الخارجي وتم الموافقة محلياً
+                                return true;
 
                             },
 
 
                         /*
-                         * Phase 2:
-                         * User signs the transaction.
-                         *
-                         * Phase 3:
-                         * Pi returns paymentId + txid.
+                         * Phase 2 & 3:
+                         * User signs and payment completes
                          */
                         onReadyForServerCompletion:
                             async (
@@ -743,71 +438,24 @@ async function createPiPayment({
                                 txid
                             ) => {
 
-                                try {
+                                console.log(
+                                    '[SARA VIA] Payment completed successfully:',
+                                    paymentId,
+                                    txid
+                                );
 
-                                    const response =
-                                        await fetch(
-                                            '/api/payments/complete',
-                                            {
-                                                method:
-                                                    'POST',
+                                SaraVia.activePayment = {
+                                    paymentId,
+                                    txid,
+                                    success: true
+                                };
 
-                                                headers: {
-                                                    'Content-Type':
-                                                        'application/json',
+                                showNotification(
+                                    'Payment completed successfully.',
+                                    'success'
+                                );
 
-                                                    'Authorization':
-                                                        `Bearer ${SaraVia.accessToken}`
-                                                },
-
-                                                body:
-                                                    JSON.stringify({
-                                                        paymentId,
-                                                        txid
-                                                    })
-                                            }
-                                        );
-
-                                    const result =
-                                        await response.json();
-
-                                    if (
-                                        !response.ok ||
-                                        !result.success
-                                    ) {
-
-                                        throw new Error(
-                                            result.error ||
-                                            'Payment completion failed.'
-                                        );
-
-                                    }
-
-                                    console.log(
-                                        '[SARA VIA] Payment completed:',
-                                        paymentId
-                                    );
-
-                                    SaraVia.activePayment =
-                                        result;
-
-                                    showNotification(
-                                        'Payment completed successfully.',
-                                        'success'
-                                    );
-
-                                    resolve(result);
-
-                                } catch (error) {
-
-                                    console.error(
-                                        '[SARA VIA] Completion error:',
-                                        error
-                                    );
-
-                                    reject(error);
-
-                                }
+                                resolve(SaraVia.activePayment);
 
                             },
 
