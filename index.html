@@ -1,968 +1,1583 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+  <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
-    >
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  >
 
-    <meta
-        name="theme-color"
-        content="#07111f"
-    >
+  <meta
+    name="description"
+    content="SARA VIA — A premium global travel platform connecting flights, hotels, cruises, experiences and Web3."
+  >
 
-    <meta
-        name="description"
-        content="SARA VIA — Premium global travel powered by Web3 and Pi Network."
-    >
+  <meta
+    name="theme-color"
+    content="#06111f"
+  >
 
-    <meta
-        name="application-name"
-        content="SARA VIA"
-    >
+  <meta
+    name="apple-mobile-web-app-capable"
+    content="yes"
+  >
 
-    <title>SARA VIA — Luxury Travel Web3</title>
+  <meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="black-translucent"
+  >
 
-    <!--
-    ============================================================
-    SARA VIA — PI NETWORK SDK
-    ============================================================
-    Pi requires the SDK to be explicitly loaded.
-    Sandbox mode is enabled for Testnet development.
-    ============================================================
-    -->
+  <title>SARA VIA — Global Travel · Web3</title>
 
-    <script src="https://sdk.minepi.com/pi-sdk.js"></script>
+  <!-- Pi Network SDK -->
+  <script src="https://sdk.minepi.com/pi-sdk.js"></script>
 
-    <script>
-        /*
-         * Pi SDK initialization
-         * TESTNET / SANDBOX
-         */
-        window.addEventListener("DOMContentLoaded", function () {
-            if (typeof window.Pi !== "undefined") {
-                try {
-                    window.Pi.init({
-                        version: "2.0",
-                        sandbox: true
-                    });
+  <!-- Luxury typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-                    console.log(
-                        "[SARA VIA] Pi SDK initialized — TESTNET"
-                    );
-                } catch (error) {
-                    console.error(
-                        "[SARA VIA] Pi SDK initialization failed:",
-                        error
-                    );
-                }
-            } else {
-                console.warn(
-                    "[SARA VIA] Pi SDK is not available."
-                );
-            }
-        });
-    </script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+    rel="stylesheet"
+  >
 
-    <!-- SARA VIA Styles -->
-    <link
-        rel="stylesheet"
-        href="style.css"
-    >
-
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
+  <!-- =========================================================
+       APP SHELL
+  ========================================================== -->
+
+  <div class="app-shell">
+
     <!-- =======================================================
-         APP SHELL
+         ANNOUNCEMENT
+    ======================================================== -->
+
+    <div class="top-announcement">
+      <div class="announcement-inner">
+
+        <span class="announcement-dot"></span>
+
+        <span>
+          SARA VIA · GLOBAL TRAVEL · WEB3
+        </span>
+
+        <span class="announcement-divider">|</span>
+
+        <span>
+          Discover the world. Travel differently.
+        </span>
+
+      </div>
+    </div>
+
+
+    <!-- =======================================================
+         HEADER
+    ======================================================== -->
+
+    <header class="site-header">
+
+      <div class="header-inner">
+
+        <!-- Brand -->
+
+        <a
+          href="#home"
+          class="brand"
+          aria-label="SARA VIA Home"
+        >
+
+          <span class="brand-mark">
+            S
+          </span>
+
+          <span class="brand-copy">
+
+            <strong>
+              SARA VIA
+            </strong>
+
+            <small>
+              TRAVEL · WEB3
+            </small>
+
+          </span>
+
+        </a>
+
+
+        <!-- Main Navigation -->
+
+        <nav
+          class="main-nav"
+          aria-label="Main navigation"
+        >
+
+          <a href="#discover">
+            Discover
+          </a>
+
+          <a href="#flights">
+            Flights
+          </a>
+
+          <a href="#stays">
+            Hotels
+          </a>
+
+          <a href="#cruises">
+            Cruises
+          </a>
+
+          <a href="#experiences">
+            Experiences
+          </a>
+
+          <a href="#web3">
+            Web3
+          </a>
+
+        </nav>
+
+
+        <!-- Header Actions -->
+
+        <div class="header-actions">
+
+          <button
+            type="button"
+            class="language-selector"
+            id="languageSelector"
+            aria-label="Select language"
+          >
+            <span>EN</span>
+            <span class="language-chevron">⌄</span>
+          </button>
+
+          <button
+            type="button"
+            class="pi-connect-button"
+            id="connectPiButton"
+            onclick="connectPi()"
+          >
+            <span class="pi-button-icon">π</span>
+            <span class="pi-button-text">Connect Pi</span>
+          </button>
+
+          <button
+            type="button"
+            class="mobile-menu-button"
+            id="mobileMenuButton"
+            aria-label="Open menu"
+            aria-expanded="false"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+
+        </div>
+
+      </div>
+
+    </header>
+
+
+    <!-- =======================================================
+         MOBILE NAVIGATION
     ======================================================== -->
 
     <div
-        id="app"
-        class="app-shell"
+      class="mobile-navigation"
+      id="mobileNavigation"
+      aria-hidden="true"
     >
 
-        <!-- ===================================================
-             HEADER
-        ==================================================== -->
-
-        <header class="site-header">
-
-            <div class="container header-inner">
-
-                <a
-                    href="#top"
-                    class="brand"
-                    aria-label="SARA VIA Home"
-                >
-
-                    <span class="brand-mark">
-                        S
-                    </span>
-
-                    <span class="brand-copy">
-                        <strong>SARA VIA</strong>
-                        <small>TRAVEL · WEB3</small>
-                    </span>
-
-                </a>
-
-                <nav
-                    class="main-nav"
-                    aria-label="Main navigation"
-                >
-
-                    <a href="#travel">
-                        Travel
-                    </a>
-
-                    <a href="#destinations">
-                        Destinations
-                    </a>
-
-                    <a href="#experiences">
-                        Experiences
-                    </a>
-
-                    <a href="#web3">
-                        Web3
-                    </a>
-
-                </nav>
-
-                <button
-                    id="connectPiBtn"
-                    class="pi-connect-btn"
-                    type="button"
-                    aria-label="Connect with Pi"
-                >
-                    <span class="pi-icon">π</span>
-                    <span>Connect Pi</span>
-                </button>
-
-            </div>
-
-        </header>
-
-
-        <!-- ===================================================
-             HERO
-        ==================================================== -->
-
-        <main id="top">
-
-            <section
-                class="hero"
-                aria-labelledby="heroTitle"
-            >
-
-                <div class="hero-background">
-
-                    <div class="hero-glow glow-one"></div>
-                    <div class="hero-glow glow-two"></div>
-
-                    <div class="orbit orbit-one"></div>
-                    <div class="orbit orbit-two"></div>
-
-                </div>
-
-                <div class="container hero-grid">
-
-                    <div class="hero-content">
-
-                        <div class="eyebrow">
-                            <span class="eyebrow-dot"></span>
-                            GLOBAL TRAVEL · WEB3
-                        </div>
-
-                        <h1 id="heroTitle">
-                            Travel Beyond
-                            <span>Boundaries.</span>
-                        </h1>
-
-                        <p class="hero-description">
-                            Discover extraordinary destinations,
-                            premium stays and unforgettable
-                            experiences through one intelligent
-                            global travel platform.
-                        </p>
-
-                        <div class="hero-actions">
-
-                            <a
-                                href="#travel"
-                                class="btn btn-primary"
-                            >
-                                Explore Travel
-                                <span>→</span>
-                            </a>
-
-                            <a
-                                href="#web3"
-                                class="btn btn-secondary"
-                            >
-                                Discover Web3
-                            </a>
-
-                        </div>
-
-                        <div class="hero-trust">
-
-                            <span>
-                                ✦ Secure
-                            </span>
-
-                            <span>
-                                ✦ Global
-                            </span>
-
-                            <span>
-                                ✦ Web3 Ready
-                            </span>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- HERO VISUAL -->
-
-                    <div
-                        class="hero-visual"
-                        aria-hidden="true"
-                    >
-
-                        <div class="planet">
-
-                            <div class="planet-core"></div>
-
-                            <div class="planet-ring ring-a"></div>
-                            <div class="planet-ring ring-b"></div>
-                            <div class="planet-ring ring-c"></div>
-
-                            <div class="flight-path path-a"></div>
-                            <div class="flight-path path-b"></div>
-
-                            <div class="flight-point point-a"></div>
-                            <div class="flight-point point-b"></div>
-                            <div class="flight-point point-c"></div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-
-            <!-- =================================================
-                 TRAVEL SEARCH
-            ================================================== -->
-
-            <section
-                id="travel"
-                class="travel-section"
-            >
-
-                <div class="container">
-
-                    <div class="section-heading">
-
-                        <span class="section-kicker">
-                            YOUR JOURNEY
-                        </span>
-
-                        <h2>
-                            Where will you go next?
-                        </h2>
-
-                        <p>
-                            Search the world from one premium
-                            travel experience.
-                        </p>
-
-                    </div>
-
-
-                    <div class="search-card">
-
-                        <div
-                            class="travel-tabs"
-                            role="tablist"
-                            aria-label="Travel services"
-                        >
-
-                            <button
-                                class="travel-tab active"
-                                type="button"
-                                data-type="flights"
-                                role="tab"
-                                aria-selected="true"
-                            >
-                                ✈ Flights
-                            </button>
-
-                            <button
-                                class="travel-tab"
-                                type="button"
-                                data-type="hotels"
-                                role="tab"
-                                aria-selected="false"
-                            >
-                                ◈ Hotels
-                            </button>
-
-                            <button
-                                class="travel-tab"
-                                type="button"
-                                data-type="experiences"
-                                role="tab"
-                                aria-selected="false"
-                            >
-                                ◇ Experiences
-                            </button>
-
-                            <button
-                                class="travel-tab"
-                                type="button"
-                                data-type="transport"
-                                role="tab"
-                                aria-selected="false"
-                            >
-                                🚘 Transport
-                            </button>
-
-                        </div>
-
-
-                        <form
-                            id="travelSearchForm"
-                            class="search-form"
-                        >
-
-                            <div class="field">
-
-                                <label for="from">
-                                    From
-                                </label>
-
-                                <input
-                                    id="from"
-                                    name="from"
-                                    type="text"
-                                    placeholder="City or airport"
-                                    autocomplete="off"
-                                >
-
-                            </div>
-
-
-                            <div class="field">
-
-                                <label for="to">
-                                    To
-                                </label>
-
-                                <input
-                                    id="to"
-                                    name="to"
-                                    type="text"
-                                    placeholder="Destination"
-                                    autocomplete="off"
-                                >
-
-                            </div>
-
-
-                            <div class="field">
-
-                                <label for="departure">
-                                    Departure
-                                </label>
-
-                                <input
-                                    id="departure"
-                                    name="departure"
-                                    type="date"
-                                >
-
-                            </div>
-
-
-                            <div class="field">
-
-                                <label for="guests">
-                                    Guests
-                                </label>
-
-                                <select
-                                    id="guests"
-                                    name="guests"
-                                >
-
-                                    <option value="1">
-                                        1 Guest
-                                    </option>
-
-                                    <option value="2" selected>
-                                        2 Guests
-                                    </option>
-
-                                    <option value="3">
-                                        3 Guests
-                                    </option>
-
-                                    <option value="4">
-                                        4 Guests
-                                    </option>
-
-                                    <option value="5">
-                                        5+ Guests
-                                    </option>
-
-                                </select>
-
-                            </div>
-
-
-                            <button
-                                type="submit"
-                                class="search-button"
-                            >
-                                <span>Search</span>
-                                <span>→</span>
-                            </button>
-
-                        </form>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-
-            <!-- =================================================
-                 SERVICES
-            ================================================== -->
-
-            <section class="services-section">
-
-                <div class="container">
-
-                    <div class="section-heading">
-
-                        <span class="section-kicker">
-                            SARA VIA SERVICES
-                        </span>
-
-                        <h2>
-                            Everything for the journey.
-                        </h2>
-
-                    </div>
-
-
-                    <div class="services-grid">
-
-                        <article class="service-card">
-
-                            <div class="service-icon">
-                                ✈
-                            </div>
-
-                            <h3>
-                                Global Flights
-                            </h3>
-
-                            <p>
-                                Discover routes and premium
-                                journeys across the world.
-                            </p>
-
-                            <a href="#travel">
-                                Explore flights →
-                            </a>
-
-                        </article>
-
-
-                        <article class="service-card">
-
-                            <div class="service-icon">
-                                ◈
-                            </div>
-
-                            <h3>
-                                Luxury Hotels
-                            </h3>
-
-                            <p>
-                                Curated stays designed for
-                                comfort, style and distinction.
-                            </p>
-
-                            <a href="#travel">
-                                Find your stay →
-                            </a>
-
-                        </article>
-
-
-                        <article class="service-card">
-
-                            <div class="service-icon">
-                                ◇
-                            </div>
-
-                            <h3>
-                                Experiences
-                            </h3>
-
-                            <p>
-                                Go beyond sightseeing with
-                                unforgettable local experiences.
-                            </p>
-
-                            <a href="#experiences">
-                                Discover experiences →
-                            </a>
-
-                        </article>
-
-
-                        <article class="service-card">
-
-                            <div class="service-icon">
-                                🚘
-                            </div>
-
-                            <h3>
-                                Smart Transport
-                            </h3>
-
-                            <p>
-                                Move through every destination
-                                with seamless mobility.
-                            </p>
-
-                            <a href="#travel">
-                                Explore transport →
-                            </a>
-
-                        </article>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-
-            <!-- =================================================
-                 DESTINATIONS
-            ================================================== -->
-
-            <section
-                id="destinations"
-                class="destinations-section"
-            >
-
-                <div class="container">
-
-                    <div class="section-heading heading-row">
-
-                        <div>
-
-                            <span class="section-kicker">
-                                INSPIRATION
-                            </span>
-
-                            <h2>
-                                Extraordinary destinations.
-                            </h2>
-
-                        </div>
-
-                        <a
-                            href="#travel"
-                            class="text-link"
-                        >
-                            View all destinations →
-                        </a>
-
-                    </div>
-
-
-                    <div class="destinations-grid">
-
-                        <article class="destination-card paris">
-
-                            <div class="destination-overlay">
-
-                                <span>
-                                    EUROPE
-                                </span>
-
-                                <h3>
-                                    Paris
-                                </h3>
-
-                                <p>
-                                    Art · Culture · Elegance
-                                </p>
-
-                            </div>
-
-                        </article>
-
-
-                        <article class="destination-card dubai">
-
-                            <div class="destination-overlay">
-
-                                <span>
-                                    MIDDLE EAST
-                                </span>
-
-                                <h3>
-                                    Dubai
-                                </h3>
-
-                                <p>
-                                    Luxury · Innovation · Wonder
-                                </p>
-
-                            </div>
-
-                        </article>
-
-
-                        <article class="destination-card tokyo">
-
-                            <div class="destination-overlay">
-
-                                <span>
-                                    ASIA
-                                </span>
-
-                                <h3>
-                                    Tokyo
-                                </h3>
-
-                                <p>
-                                    Future · Tradition · Energy
-                                </p>
-
-                            </div>
-
-                        </article>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-
-            <!-- =================================================
-                 WEB3
-            ================================================== -->
-
-            <section
-                id="web3"
-                class="web3-section"
-            >
-
-                <div class="container web3-grid">
-
-                    <div class="web3-content">
-
-                        <span class="section-kicker">
-                            THE FUTURE OF TRAVEL
-                        </span>
-
-                        <h2>
-                            Travel meets
-                            <span>Web3.</span>
-                        </h2>
-
-                        <p>
-                            SARA VIA connects global travel
-                            with a new generation of digital
-                            commerce — creating a seamless
-                            experience for discovery, booking
-                            and secure Pi-powered payments.
-                        </p>
-
-                        <div class="web3-points">
-
-                            <div>
-                                <strong>
-                                    01
-                                </strong>
-
-                                <span>
-                                    Digital-first travel
-                                </span>
-                            </div>
-
-                            <div>
-                                <strong>
-                                    02
-                                </strong>
-
-                                <span>
-                                    Secure payment infrastructure
-                                </span>
-                            </div>
-
-                            <div>
-                                <strong>
-                                    03
-                                </strong>
-
-                                <span>
-                                    Global Web3 ecosystem
-                                </span>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="web3-visual">
-
-                        <div class="web3-card">
-
-                            <div class="web3-card-top">
-
-                                <span>
-                                    SARA VIA
-                                </span>
-
-                                <span>
-                                    TESTNET
-                                </span>
-
-                            </div>
-
-                            <div class="web3-symbol">
-                                π
-                            </div>
-
-                            <div class="web3-card-bottom">
-
-                                <span>
-                                    WEB3 TRAVEL
-                                </span>
-
-                                <span>
-                                    SECURE
-                                </span>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-
-            <!-- =================================================
-                 EXPERIENCES
-            ================================================== -->
-
-            <section
-                id="experiences"
-                class="experiences-section"
-            >
-
-                <div class="container">
-
-                    <div class="experience-banner">
-
-                        <div>
-
-                            <span class="section-kicker">
-                                CURATED FOR YOU
-                            </span>
-
-                            <h2>
-                                Make the journey
-                                unforgettable.
-                            </h2>
-
-                            <p>
-                                From hidden gems to iconic moments,
-                                discover experiences worth traveling for.
-                            </p>
-
-                        </div>
-
-                        <a
-                            href="#travel"
-                            class="btn btn-primary"
-                        >
-                            Explore Experiences
-                            <span>→</span>
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-        </main>
-
-
-        <!-- ===================================================
-             FOOTER
-        ==================================================== -->
-
-        <footer class="site-footer">
-
-            <div class="container footer-grid">
-
-                <div class="footer-brand">
-
-                    <div class="brand">
-
-                        <span class="brand-mark">
-                            S
-                        </span>
-
-                        <span class="brand-copy">
-
-                            <strong>
-                                SARA VIA
-                            </strong>
-
-                            <small>
-                                TRAVEL · WEB3
-                            </small>
-
-                        </span>
-
-                    </div>
-
-                    <p>
-                        A new generation of global travel,
-                        designed for the connected world.
-                    </p>
-
-                </div>
-
-
-                <div class="footer-column">
-
-                    <h4>
-                        Explore
-                    </h4>
-
-                    <a href="#travel">
-                        Flights
-                    </a>
-
-                    <a href="#travel">
-                        Hotels
-                    </a>
-
-                    <a href="#experiences">
-                        Experiences
-                    </a>
-
-                    <a href="#destinations">
-                        Destinations
-                    </a>
-
-                </div>
-
-
-                <div class="footer-column">
-
-                    <h4>
-                        SARA VIA
-                    </h4>
-
-                    <a href="#web3">
-                        Web3
-                    </a>
-
-                    <a href="#top">
-                        About
-                    </a>
-
-                    <a href="#top">
-                        Contact
-                    </a>
-
-                </div>
-
-
-                <div class="footer-column">
-
-                    <h4>
-                        Network
-                    </h4>
-
-                    <span class="network-badge">
-                        <span class="status-dot"></span>
-                        PI TESTNET
-                    </span>
-
-                    <span class="network-note">
-                        Development environment
-                    </span>
-
-                </div>
-
-            </div>
-
-
-            <div class="container footer-bottom">
-
-                <span>
-                    © 2026 SARA VIA. All rights reserved.
-                </span>
-
-                <span>
-                    Built for the future of travel.
-                </span>
-
-            </div>
-
-        </footer>
-
-
-        <!-- ===================================================
-             NOTIFICATION CONTAINER
-        ==================================================== -->
-
-        <div
-            id="notificationContainer"
-            class="notification-container"
-            aria-live="polite"
-            aria-atomic="true"
-        ></div>
+      <a href="#discover">
+        Discover
+      </a>
+
+      <a href="#flights">
+        Flights
+      </a>
+
+      <a href="#stays">
+        Hotels
+      </a>
+
+      <a href="#cruises">
+        Cruises
+      </a>
+
+      <a href="#experiences">
+        Experiences
+      </a>
+
+      <a href="#web3">
+        Web3
+      </a>
+
+      <div class="mobile-language">
+        <span>Language</span>
+
+        <button type="button">
+          English
+        </button>
+      </div>
 
     </div>
 
 
     <!-- =======================================================
-         SARA VIA APP
+         HERO
     ======================================================== -->
 
-    <script src="app.js"></script>
+    <main id="home">
+
+      <section class="hero-section">
+
+        <div class="hero-background">
+
+          <div class="hero-glow hero-glow-one"></div>
+          <div class="hero-glow hero-glow-two"></div>
+
+          <div class="hero-grid"></div>
+
+        </div>
+
+
+        <div class="hero-content">
+
+          <div class="hero-eyebrow">
+
+            <span class="eyebrow-line"></span>
+
+            <span>
+              THE WORLD IS YOURS TO EXPLORE
+            </span>
+
+            <span class="eyebrow-line"></span>
+
+          </div>
+
+
+          <h1 class="hero-title">
+
+            Travel
+            <span>Beyond</span>
+            Boundaries.
+
+          </h1>
+
+
+          <p class="hero-description">
+
+            One intelligent travel platform for extraordinary
+            destinations, premium stays, unforgettable experiences
+            and a new generation of Web3 travel.
+
+          </p>
+
+
+          <div class="hero-actions">
+
+            <a
+              href="#discover"
+              class="primary-button"
+            >
+              <span>
+                Explore the World
+              </span>
+
+              <span class="button-arrow">
+                →
+              </span>
+            </a>
+
+            <a
+              href="#web3"
+              class="secondary-button"
+            >
+              Discover Web3
+            </a>
+
+          </div>
+
+
+          <div class="hero-trust">
+
+            <span>
+              ✦ Premium Travel
+            </span>
+
+            <span>
+              ✦ Global Destinations
+            </span>
+
+            <span>
+              ✦ Pi Web3 Ready
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <!-- Floating destination visual -->
+
+        <div class="hero-destination-orbit">
+
+          <div class="orbit-ring orbit-ring-one"></div>
+          <div class="orbit-ring orbit-ring-two"></div>
+          <div class="orbit-ring orbit-ring-three"></div>
+
+          <div class="destination-globe">
+
+            <div class="globe-core">
+              ◇
+            </div>
+
+            <span class="destination-node node-paris">
+              Paris
+            </span>
+
+            <span class="destination-node node-dubai">
+              Dubai
+            </span>
+
+            <span class="destination-node node-tokyo">
+              Tokyo
+            </span>
+
+            <span class="destination-node node-maldives">
+              Maldives
+            </span>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =====================================================
+           TRAVEL SEARCH ENGINE
+      ====================================================== -->
+
+      <section
+        class="travel-search-section"
+        id="discover"
+      >
+
+        <div class="section-container">
+
+          <div class="search-heading">
+
+            <div>
+
+              <span class="section-kicker">
+                YOUR JOURNEY STARTS HERE
+              </span>
+
+              <h2>
+                Where will you go next?
+              </h2>
+
+            </div>
+
+            <p>
+              Search the world through one premium travel experience.
+            </p>
+
+          </div>
+
+
+          <div class="travel-search-card">
+
+            <!-- Travel type -->
+
+            <div
+              class="travel-type-tabs"
+              role="tablist"
+              aria-label="Travel type"
+            >
+
+              <button
+                type="button"
+                class="travel-type-tab active"
+                data-travel-type="flights"
+                role="tab"
+                aria-selected="true"
+              >
+                <span>✈</span>
+                Flights
+              </button>
+
+              <button
+                type="button"
+                class="travel-type-tab"
+                data-travel-type="hotels"
+                role="tab"
+                aria-selected="false"
+              >
+                <span>⌂</span>
+                Hotels
+              </button>
+
+              <button
+                type="button"
+                class="travel-type-tab"
+                data-travel-type="cruises"
+                role="tab"
+                aria-selected="false"
+              >
+                <span>⚓</span>
+                Cruises
+              </button>
+
+              <button
+                type="button"
+                class="travel-type-tab"
+                data-travel-type="experiences"
+                role="tab"
+                aria-selected="false"
+              >
+                <span>✦</span>
+                Experiences
+              </button>
+
+              <button
+                type="button"
+                class="travel-type-tab"
+                data-travel-type="transport"
+                role="tab"
+                aria-selected="false"
+              >
+                <span>◆</span>
+                Transfers
+              </button>
+
+            </div>
+
+
+            <!-- Search form -->
+
+            <form
+              class="travel-search-form"
+              id="travelSearchForm"
+            >
+
+              <div class="search-field">
+
+                <span class="field-icon">
+                  ◎
+                </span>
+
+                <div>
+
+                  <label for="departure">
+                    From
+                  </label>
+
+                  <input
+                    type="text"
+                    id="departure"
+                    name="departure"
+                    placeholder="City or airport"
+                    autocomplete="off"
+                  >
+
+                </div>
+
+              </div>
+
+
+              <button
+                type="button"
+                class="swap-locations"
+                id="swapLocations"
+                aria-label="Swap locations"
+              >
+                ⇄
+              </button>
+
+
+              <div class="search-field">
+
+                <span class="field-icon">
+                  ◉
+                </span>
+
+                <div>
+
+                  <label for="destination">
+                    To
+                  </label>
+
+                  <input
+                    type="text"
+                    id="destination"
+                    name="destination"
+                    placeholder="Where to?"
+                    autocomplete="off"
+                  >
+
+                </div>
+
+              </div>
+
+
+              <div class="search-field">
+
+                <span class="field-icon">
+                  ◷
+                </span>
+
+                <div>
+
+                  <label for="travelDate">
+                    Date
+                  </label>
+
+                  <input
+                    type="date"
+                    id="travelDate"
+                    name="travelDate"
+                  >
+
+                </div>
+
+              </div>
+
+
+              <div class="search-field">
+
+                <span class="field-icon">
+                  ♙
+                </span>
+
+                <div>
+
+                  <label for="guests">
+                    Guests
+                  </label>
+
+                  <select
+                    id="guests"
+                    name="guests"
+                  >
+
+                    <option value="1">
+                      1 Guest
+                    </option>
+
+                    <option value="2" selected>
+                      2 Guests
+                    </option>
+
+                    <option value="3">
+                      3 Guests
+                    </option>
+
+                    <option value="4">
+                      4 Guests
+                    </option>
+
+                    <option value="5">
+                      5 Guests
+                    </option>
+
+                    <option value="6">
+                      6+ Guests
+                    </option>
+
+                  </select>
+
+                </div>
+
+              </div>
+
+
+              <button
+                type="submit"
+                class="search-button"
+              >
+
+                <span>
+                  Search
+                </span>
+
+                <span>
+                  →
+                </span>
+
+              </button>
+
+            </form>
+
+
+            <div class="search-footer">
+
+              <span>
+                ◇ Flexible travel options
+              </span>
+
+              <span>
+                ◇ Premium experiences
+              </span>
+
+              <span>
+                ◇ Secure Web3 payments
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =====================================================
+           SERVICES
+      ====================================================== -->
+
+      <section
+        class="services-section"
+        id="flights"
+      >
+
+        <div class="section-container">
+
+          <div class="section-heading-centered">
+
+            <span class="section-kicker">
+              EVERYTHING YOU NEED
+            </span>
+
+            <h2>
+              One world. One journey.
+            </h2>
+
+            <p>
+              From takeoff to unforgettable moments,
+              SARA VIA brings your journey together.
+            </p>
+
+          </div>
+
+
+          <div class="service-grid">
+
+            <article class="service-card featured-service">
+
+              <div class="service-icon">
+                ✈
+              </div>
+
+              <span class="service-number">
+                01
+              </span>
+
+              <h3>
+                Flights
+              </h3>
+
+              <p>
+                Discover routes, airlines and premium
+                journeys connecting you to the world.
+              </p>
+
+              <a href="#discover">
+                Explore flights →
+              </a>
+
+            </article>
+
+
+            <article
+              class="service-card"
+              id="stays"
+            >
+
+              <div class="service-icon">
+                ⌂
+              </div>
+
+              <span class="service-number">
+                02
+              </span>
+
+              <h3>
+                Hotels & Resorts
+              </h3>
+
+              <p>
+                From iconic city hotels to private
+                island retreats and luxury resorts.
+              </p>
+
+              <a href="#discover">
+                Discover stays →
+              </a>
+
+            </article>
+
+
+            <article
+              class="service-card"
+              id="cruises"
+            >
+
+              <div class="service-icon">
+                ⚓
+              </div>
+
+              <span class="service-number">
+                03
+              </span>
+
+              <h3>
+                Cruises
+              </h3>
+
+              <p>
+                Sail across extraordinary destinations
+                with curated cruise experiences.
+              </p>
+
+              <a href="#discover">
+                Explore cruises →
+              </a>
+
+            </article>
+
+
+            <article
+              class="service-card"
+              id="experiences"
+            >
+
+              <div class="service-icon">
+                ✦
+              </div>
+
+              <span class="service-number">
+                04
+              </span>
+
+              <h3>
+                Experiences
+              </h3>
+
+              <p>
+                Private tours, culture, adventure,
+                gastronomy and unforgettable moments.
+              </p>
+
+              <a href="#discover">
+                Find experiences →
+              </a>
+
+            </article>
+
+
+            <article class="service-card">
+
+              <div class="service-icon">
+                ◆
+              </div>
+
+              <span class="service-number">
+                05
+              </span>
+
+              <h3>
+                Private Transfers
+              </h3>
+
+              <p>
+                Seamless airport transfers, chauffeur
+                services and premium transportation.
+              </p>
+
+              <a href="#discover">
+                Arrange transfer →
+              </a>
+
+            </article>
+
+
+            <article class="service-card">
+
+              <div class="service-icon">
+                ◈
+              </div>
+
+              <span class="service-number">
+                06
+              </span>
+
+              <h3>
+                Travel Concierge
+              </h3>
+
+              <p>
+                A smarter way to organize every detail
+                of your global journey.
+              </p>
+
+              <a href="#discover">
+                Meet your concierge →
+              </a>
+
+            </article>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =====================================================
+           DESTINATIONS
+      ====================================================== -->
+
+      <section
+        class="destinations-section"
+        id="destinations"
+      >
+
+        <div class="section-container">
+
+          <div class="destination-heading">
+
+            <div>
+
+              <span class="section-kicker">
+                EXPLORE THE WORLD
+              </span>
+
+              <h2>
+                Destinations worth discovering.
+              </h2>
+
+            </div>
+
+            <a
+              href="#discover"
+              class="text-link"
+            >
+              View all destinations →
+            </a>
+
+          </div>
+
+
+          <div class="destination-grid">
+
+            <article class="destination-card destination-large">
+
+              <div class="destination-image paris-image">
+                <span>PARIS</span>
+              </div>
+
+              <div class="destination-overlay">
+
+                <div>
+
+                  <small>
+                    FRANCE
+                  </small>
+
+                  <h3>
+                    Paris
+                  </h3>
+
+                </div>
+
+                <span>
+                  →
+                </span>
+
+              </div>
+
+            </article>
+
+
+            <article class="destination-card">
+
+              <div class="destination-image dubai-image">
+                <span>DUBAI</span>
+              </div>
+
+              <div class="destination-overlay">
+
+                <div>
+
+                  <small>
+                    UNITED ARAB EMIRATES
+                  </small>
+
+                  <h3>
+                    Dubai
+                  </h3>
+
+                </div>
+
+                <span>
+                  →
+                </span>
+
+              </div>
+
+            </article>
+
+
+            <article class="destination-card">
+
+              <div class="destination-image tokyo-image">
+                <span>TOKYO</span>
+              </div>
+
+              <div class="destination-overlay">
+
+                <div>
+
+                  <small>
+                    JAPAN
+                  </small>
+
+                  <h3>
+                    Tokyo
+                  </h3>
+
+                </div>
+
+                <span>
+                  →
+                </span>
+
+              </div>
+
+            </article>
+
+
+            <article class="destination-card">
+
+              <div class="destination-image maldives-image">
+                <span>MALDIVES</span>
+              </div>
+
+              <div class="destination-overlay">
+
+                <div>
+
+                  <small>
+                    INDIAN OCEAN
+                  </small>
+
+                  <h3>
+                    Maldives
+                  </h3>
+
+                </div>
+
+                <span>
+                  →
+                </span>
+
+              </div>
+
+            </article>
+
+
+            <article class="destination-card">
+
+              <div class="destination-image istanbul-image">
+                <span>ISTANBUL</span>
+              </div>
+
+              <div class="destination-overlay">
+
+                <div>
+
+                  <small>
+                    TÜRKİYE
+                  </small>
+
+                  <h3>
+                    Istanbul
+                  </h3>
+
+                </div>
+
+                <span>
+                  →
+                </span>
+
+              </div>
+
+            </article>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =====================================================
+           PREMIUM EXPERIENCES
+      ====================================================== -->
+
+      <section class="experience-banner">
+
+        <div class="experience-background"></div>
+
+        <div class="experience-content">
+
+          <span class="section-kicker">
+            BEYOND THE DESTINATION
+          </span>
+
+          <h2>
+            Travel is not just<br>
+            where you go.
+            <span>
+              It's how you feel.
+            </span>
+          </h2>
+
+          <p>
+            Curated experiences designed for travelers
+            who expect more from every journey.
+          </p>
+
+          <a
+            href="#discover"
+            class="primary-button"
+          >
+            Discover Experiences
+            <span>→</span>
+          </a>
+
+        </div>
+
+      </section>
+
+
+      <!-- =====================================================
+           WEB3
+      ====================================================== -->
+
+      <section
+        class="web3-section"
+        id="web3"
+      >
+
+        <div class="section-container">
+
+          <div class="web3-layout">
+
+            <div class="web3-copy">
+
+              <span class="section-kicker">
+                TRAVEL · WEB3
+              </span>
+
+              <h2>
+                The future of travel
+                is already here.
+              </h2>
+
+              <p>
+                SARA VIA combines premium global travel
+                with the possibilities of Web3 — creating
+                a simpler, smarter and more connected
+                travel experience.
+              </p>
+
+
+              <div class="web3-features">
+
+                <div>
+
+                  <span class="web3-feature-icon">
+                    π
+                  </span>
+
+                  <div>
+
+                    <strong>
+                      Pi Payments
+                    </strong>
+
+                    <small>
+                      Secure Web3 payment experience.
+                    </small>
+
+                  </div>
+
+                </div>
+
+
+                <div>
+
+                  <span class="web3-feature-icon">
+                    ◈
+                  </span>
+
+                  <div>
+
+                    <strong>
+                      Digital Travel
+                    </strong>
+
+                    <small>
+                      A new generation of connected journeys.
+                    </small>
+
+                  </div>
+
+                </div>
+
+
+                <div>
+
+                  <span class="web3-feature-icon">
+                    ◎
+                  </span>
+
+                  <div>
+
+                    <strong>
+                      Global Access
+                    </strong>
+
+                    <small>
+                      One platform designed for the world.
+                    </small>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+
+              <button
+                type="button"
+                class="pi-payment-button"
+                id="piPaymentButton"
+                onclick="connectPi()"
+              >
+
+                <span>
+                  π
+                </span>
+
+                <span>
+                  Connect with Pi
+                </span>
+
+                <span>
+                  →
+                </span>
+
+              </button>
+
+            </div>
+
+
+            <div class="web3-visual">
+
+              <div class="web3-orbit orbit-a"></div>
+              <div class="web3-orbit orbit-b"></div>
+              <div class="web3-orbit orbit-c"></div>
+
+              <div class="web3-core">
+
+                <span class="web3-symbol">
+                  π
+                </span>
+
+                <span>
+                  SARA VIA
+                </span>
+
+                <small>
+                  TESTNET
+                </small>
+
+              </div>
+
+              <span class="web3-node web3-node-a">
+                TRAVEL
+              </span>
+
+              <span class="web3-node web3-node-b">
+                PI
+              </span>
+
+              <span class="web3-node web3-node-c">
+                GLOBAL
+              </span>
+
+              <span class="web3-node web3-node-d">
+                WEB3
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =====================================================
+           JOURNEY PROMISE
+      ====================================================== -->
+
+      <section class="promise-section">
+
+        <div class="section-container">
+
+          <div class="promise-grid">
+
+            <div>
+
+              <span class="promise-number">
+                01
+              </span>
+
+              <h3>
+                Discover
+              </h3>
+
+              <p>
+                Find destinations, stays, journeys
+                and experiences worth remembering.
+              </p>
+
+            </div>
+
+
+            <div>
+
+              <span class="promise-number">
+                02
+              </span>
+
+              <h3>
+                Plan
+              </h3>
+
+              <p>
+                Bring every part of your journey
+                together in one intelligent platform.
+              </p>
+
+            </div>
+
+
+            <div>
+
+              <span class="promise-number">
+                03
+              </span>
+
+              <h3>
+                Experience
+              </h3>
+
+              <p>
+                Travel with confidence, comfort
+                and a world of possibilities.
+              </p>
+
+            </div>
+
+
+            <div>
+
+              <span class="promise-number">
+                04
+              </span>
+
+              <h3>
+                Connect
+              </h3>
+
+              <p>
+                Enter a new era of travel powered
+                by Web3 and global connectivity.
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =====================================================
+           FINAL CTA
+      ====================================================== -->
+
+      <section class="final-cta">
+
+        <div class="final-cta-glow"></div>
+
+        <div class="final-cta-content">
+
+          <span class="section-kicker">
+            SARA VIA
+          </span>
+
+          <h2>
+            Your next story
+            starts here.
+          </h2>
+
+          <p>
+            Explore more. Travel farther.
+            Experience the world differently.
+          </p>
+
+          <a
+            href="#discover"
+            class="primary-button"
+          >
+            Start Exploring
+            <span>→</span>
+          </a>
+
+        </div>
+
+      </section>
+
+    </main>
+
+
+    <!-- =======================================================
+         FOOTER
+    ======================================================== -->
+
+    <footer class="site-footer">
+
+      <div class="footer-main">
+
+        <div class="footer-brand">
+
+          <a
+            href="#home"
+            class="brand"
+          >
+
+            <span class="brand-mark">
+              S
+            </span>
+
+            <span class="brand-copy">
+
+              <strong>
+                SARA VIA
+              </strong>
+
+              <small>
+                TRAVEL · WEB3
+              </small>
+
+            </span>
+
+          </a>
+
+          <p>
+            A premium global travel platform
+            built for the next generation of travel.
+          </p>
+
+        </div>
+
+
+        <div class="footer-column">
+
+          <h4>
+            Explore
+          </h4>
+
+          <a href="#flights">
+            Flights
+          </a>
+
+          <a href="#stays">
+            Hotels
+          </a>
+
+          <a href="#cruises">
+            Cruises
+          </a>
+
+          <a href="#experiences">
+            Experiences
+          </a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+          <h4>
+            Destinations
+          </h4>
+
+          <a href="#destinations">
+            Paris
+          </a>
+
+          <a href="#destinations">
+            Dubai
+          </a>
+
+          <a href="#destinations">
+            Istanbul
+          </a>
+
+          <a href="#destinations">
+            Tokyo
+          </a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+          <h4>
+            SARA VIA
+          </h4>
+
+          <a href="#web3">
+            Web3
+          </a>
+
+          <a href="#discover">
+            Travel Concierge
+          </a>
+
+          <a href="#discover">
+            About
+          </a>
+
+          <a href="#discover">
+            Contact
+          </a>
+
+        </div>
+
+      </div>
+
+
+      <div class="footer-bottom">
+
+        <span>
+          © 2026 SARA VIA. All rights reserved.
+        </span>
+
+        <span>
+          PI TESTNET · WEB3 TRAVEL
+        </span>
+
+      </div>
+
+    </footer>
+
+
+    <!-- =======================================================
+         NOTIFICATIONS
+    ======================================================== -->
+
+    <div
+      id="notificationContainer"
+      class="notification-container"
+      aria-live="polite"
+      aria-atomic="true"
+    ></div>
+
+
+    <!-- =======================================================
+         PI STATUS
+    ======================================================== -->
+
+    <div
+      id="piStatus"
+      class="pi-status"
+      aria-live="polite"
+    ></div>
+
+  </div>
+
+
+  <!-- =========================================================
+       SCRIPTS
+  ========================================================== -->
+
+  <script>
+
+    /*
+     * Initialize Pi SDK for SARA VIA TESTNET.
+     * Production/Mainnet will use sandbox:false
+     * in the separate production application.
+     */
+
+    window.addEventListener(
+      'load',
+      function () {
+
+        if (
+          window.Pi &&
+          typeof window.Pi.init === 'function'
+        ) {
+
+          try {
+
+            window.Pi.init({
+              version: '2.0',
+              sandbox: true
+            });
+
+            document.documentElement.classList.add(
+              'pi-sdk-ready'
+            );
+
+          } catch (error) {
+
+            console.error(
+              '[SARA VIA] Pi SDK initialization failed:',
+              error
+            );
+
+          }
+
+        }
+
+      }
+    );
+
+  </script>
+
+  <script src="app.js"></script>
 
 </body>
 </html>
