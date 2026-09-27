@@ -1177,7 +1177,13 @@
                 type="button"
                 class="pi-payment-button"
                 id="piPaymentButton"
-                onclick="connectPi()"
+                onclick="createPiPayment({
+                  amount: 0.1,
+                  memo: 'SARA VIA Testnet Travel Payment',
+                  metadata: {
+                    purpose: 'test_payment'
+                  }
+                })"
               >
 
                 <span>
@@ -1185,7 +1191,7 @@
                 </span>
 
                 <span>
-                  Connect with Pi
+                  Pay with Pi
                 </span>
 
                 <span>
