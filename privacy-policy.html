@@ -1,83 +1,1368 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>سياسة الخصوصية · SARAVIA</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Privacy Policy · SARAVIA</title>
+  <meta
+    name="description"
+    content="SARAVIA Privacy Policy — Learn how SARAVIA may collect, use, protect, and manage personal information across its travel and concierge services."
+  />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#0a0a0a" />
+
   <style>
     :root {
-      --bg-deep: #0a0b0d;
-      --card-bg: #13151a;
-      --gold-primary: #eab308;
-      --gold-light: #fef08a;
-      --text-main: #f3f4f6;
-      --text-muted: #9ca3af;
-      --border-color: rgba(234, 179, 8, 0.2);
+      --obsidian: #080808;
+      --deep-black: #0d0d0d;
+      --surface: #121212;
+      --surface-soft: #171717;
+      --border: rgba(212, 180, 112, 0.20);
+      --border-strong: rgba(212, 180, 112, 0.38);
+
+      --champagne: #d8b878;
+      --champagne-light: #ead29d;
+      --champagne-soft: #b99a5d;
+
+      --text: #f4f1ea;
+      --text-soft: #c9c4b8;
+      --text-muted: #8f8a80;
+
+      --white: #ffffff;
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+
+      --max-width: 1220px;
+      --shadow:
+        0 30px 80px rgba(0, 0, 0, 0.45),
+        0 0 0 1px rgba(255, 255, 255, 0.015);
     }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--obsidian);
+    }
+
     body {
-      background-color: var(--bg-deep);
-      color: var(--text-main);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-      line-height: 1.8;
-      padding: 3rem 1.5rem;
-      max-width: 900px;
+      min-height: 100vh;
+      background:
+        radial-gradient(
+          circle at 85% 0%,
+          rgba(216, 184, 120, 0.08),
+          transparent 28%
+        ),
+        radial-gradient(
+          circle at 10% 35%,
+          rgba(216, 184, 120, 0.035),
+          transparent 24%
+        ),
+        linear-gradient(
+          180deg,
+          #080808 0%,
+          #0b0b0b 42%,
+          #080808 100%
+        );
+
+      color: var(--text);
+      font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Helvetica,
+        Arial,
+        sans-serif;
+
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    ::selection {
+      background: rgba(216, 184, 120, 0.25);
+      color: var(--white);
+    }
+
+    /* =========================
+       HEADER
+    ========================= */
+
+    .site-header {
+      position: relative;
+      border-bottom: 1px solid rgba(216, 184, 120, 0.12);
+      background: rgba(8, 8, 8, 0.78);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    .header-inner {
+      width: min(var(--max-width), calc(100% - 48px));
+      min-height: 82px;
+      margin: 0 auto;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      border: 1px solid var(--border-strong);
+      border-radius: 50%;
+
+      display: grid;
+      place-items: center;
+
+      color: var(--champagne-light);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+
+      box-shadow:
+        inset 0 0 20px rgba(216, 184, 120, 0.04),
+        0 0 30px rgba(216, 184, 120, 0.04);
+    }
+
+    .brand-name {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.28em;
+      color: var(--white);
+    }
+
+    .brand-subtitle {
+      margin-top: 2px;
+      color: var(--text-muted);
+      font-size: 9px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+    }
+
+    .header-label {
+      color: var(--champagne);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.20em;
+      text-transform: uppercase;
+    }
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 100px 0 84px;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: -220px;
+      right: -180px;
+
+      width: 620px;
+      height: 620px;
+
+      border-radius: 50%;
+      border: 1px solid rgba(216, 184, 120, 0.08);
+
+      box-shadow:
+        0 0 0 40px rgba(216, 184, 120, 0.018),
+        0 0 0 80px rgba(216, 184, 120, 0.012);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 8%;
+      bottom: 0;
+
+      width: 180px;
+      height: 1px;
+
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          var(--champagne),
+          transparent
+        );
+
+      opacity: 0.35;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+
+      width: min(var(--max-width), calc(100% - 48px));
       margin: 0 auto;
     }
-    .card {
-      background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 20px;
-      padding: 2.5rem;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+
+      margin-bottom: 26px;
+
+      color: var(--champagne-light);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
     }
-    h1 {
-      color: var(--gold-primary);
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
-      border-bottom: 2px solid var(--border-color);
-      padding-bottom: 1rem;
+
+    .eyebrow::before {
+      content: "";
+      width: 34px;
+      height: 1px;
+      background: var(--champagne);
+      opacity: 0.7;
     }
-    h2 {
-      color: var(--gold-light);
-      font-size: 1.25rem;
-      margin-top: 2rem;
+
+    .hero h1 {
+      max-width: 850px;
+
+      font-size: clamp(46px, 7vw, 86px);
+      line-height: 0.98;
+      letter-spacing: -0.045em;
+      font-weight: 600;
+
+      color: var(--white);
     }
-    p, li {
+
+    .hero h1 span {
+      display: block;
+      margin-top: 12px;
+
+      color: var(--champagne-light);
+      font-weight: 400;
+    }
+
+    .hero-description {
+      max-width: 760px;
+      margin-top: 32px;
+
+      color: var(--text-soft);
+      font-size: 17px;
+      line-height: 1.9;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+
+      margin-top: 34px;
+    }
+
+    .meta-pill {
+      padding: 8px 14px;
+
+      border: 1px solid rgba(216, 184, 120, 0.17);
+      border-radius: 999px;
+
       color: var(--text-muted);
-      margin-bottom: 1rem;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+
+      background: rgba(255, 255, 255, 0.015);
     }
-    .meta {
-      font-size: 0.9rem;
-      color: var(--gold-primary);
-      margin-bottom: 2rem;
+
+    /* =========================
+       MAIN LAYOUT
+    ========================= */
+
+    .content-wrapper {
+      width: min(var(--max-width), calc(100% - 48px));
+      margin: 0 auto 100px;
+
+      display: grid;
+      grid-template-columns: 260px minmax(0, 1fr);
+      gap: 48px;
+
+      align-items: start;
     }
-    .back-link {
+
+    /* =========================
+       TABLE OF CONTENTS
+    ========================= */
+
+    .toc {
+      position: sticky;
+      top: 30px;
+
+      padding: 24px 0;
+    }
+
+    .toc-title {
+      margin-bottom: 18px;
+
+      color: var(--champagne);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+
+    .toc-list {
+      list-style: none;
+
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .toc-list a {
+      display: block;
+
+      padding: 9px 13px;
+
+      border-left: 1px solid transparent;
+
+      color: var(--text-muted);
+      font-size: 12px;
+      line-height: 1.45;
+
+      transition:
+        color 0.2s ease,
+        border-color 0.2s ease,
+        background 0.2s ease;
+    }
+
+    .toc-list a:hover {
+      color: var(--champagne-light);
+      border-left-color: var(--champagne);
+      background: rgba(216, 184, 120, 0.035);
+    }
+
+    /* =========================
+       DOCUMENT
+    ========================= */
+
+    .document {
+      min-width: 0;
+
+      padding: clamp(28px, 5vw, 58px);
+
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255, 255, 255, 0.025),
+          rgba(255, 255, 255, 0.008)
+        ),
+        var(--surface);
+
+      box-shadow: var(--shadow);
+    }
+
+    .document-intro {
+      padding-bottom: 38px;
+      margin-bottom: 42px;
+
+      border-bottom: 1px solid rgba(216, 184, 120, 0.12);
+    }
+
+    .document-intro p {
+      color: var(--text-soft);
+      font-size: 16px;
+      line-height: 1.9;
+    }
+
+    .section {
+      scroll-margin-top: 40px;
+      padding: 30px 0;
+    }
+
+    .section + .section {
+      border-top: 1px solid rgba(255, 255, 255, 0.055);
+    }
+
+    .section-number {
       display: inline-block;
-      margin-top: 2.5rem;
-      color: var(--gold-primary);
-      text-decoration: none;
-      font-weight: bold;
-      transition: opacity 0.2s;
+      margin-bottom: 8px;
+
+      color: var(--champagne-soft);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.20em;
     }
-    .back-link:hover {
-      opacity: 0.8;
+
+    .section h2 {
+      margin-bottom: 18px;
+
+      color: var(--white);
+      font-size: clamp(22px, 3vw, 29px);
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+      font-weight: 600;
+    }
+
+    .section p {
+      margin-bottom: 16px;
+
+      color: var(--text-soft);
+      font-size: 15px;
+      line-height: 1.9;
+    }
+
+    .section p:last-child {
+      margin-bottom: 0;
+    }
+
+    .section strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .section ul {
+      margin: 18px 0 0;
+      padding-left: 22px;
+    }
+
+    .section li {
+      margin-bottom: 10px;
+
+      color: var(--text-soft);
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    .section li::marker {
+      color: var(--champagne);
+    }
+
+    /* =========================
+       HIGHLIGHT BOX
+    ========================= */
+
+    .highlight {
+      margin: 26px 0;
+      padding: 22px 24px;
+
+      border: 1px solid rgba(216, 184, 120, 0.20);
+      border-radius: var(--radius-md);
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(216, 184, 120, 0.055),
+          rgba(216, 184, 120, 0.012)
+        );
+    }
+
+    .highlight-title {
+      margin-bottom: 7px;
+
+      color: var(--champagne-light);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .highlight p {
+      margin: 0;
+      font-size: 14px;
+    }
+
+    /* =========================
+       CONTACT CARD
+    ========================= */
+
+    .contact-card {
+      margin-top: 18px;
+      padding: 26px;
+
+      border: 1px solid rgba(216, 184, 120, 0.18);
+      border-radius: var(--radius-lg);
+
+      background: rgba(0, 0, 0, 0.18);
+    }
+
+    .contact-label {
+      margin-bottom: 8px;
+
+      color: var(--text-muted);
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .contact-value {
+      color: var(--champagne-light);
+      font-size: 15px;
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    .site-footer {
+      border-top: 1px solid rgba(216, 184, 120, 0.12);
+      background: #070707;
+    }
+
+    .footer-inner {
+      width: min(var(--max-width), calc(100% - 48px));
+      min-height: 120px;
+      margin: 0 auto;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+    }
+
+    .footer-brand {
+      color: var(--white);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.24em;
+    }
+
+    .footer-caption {
+      margin-top: 5px;
+
+      color: var(--text-muted);
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .footer-right {
+      color: var(--text-muted);
+      font-size: 11px;
+      text-align: right;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width: 980px) {
+      .content-wrapper {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      .toc {
+        position: relative;
+        top: auto;
+
+        padding: 0 0 34px;
+      }
+
+      .toc-list {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 4px 12px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .header-inner,
+      .hero-inner,
+      .content-wrapper,
+      .footer-inner {
+        width: min(100% - 30px, var(--max-width));
+      }
+
+      .site-header {
+        min-height: 72px;
+      }
+
+      .header-inner {
+        min-height: 72px;
+      }
+
+      .header-label {
+        display: none;
+      }
+
+      .brand-name {
+        font-size: 13px;
+        letter-spacing: 0.22em;
+      }
+
+      .hero {
+        padding: 70px 0 62px;
+      }
+
+      .hero h1 {
+        font-size: clamp(42px, 13vw, 62px);
+      }
+
+      .hero-description {
+        font-size: 15px;
+      }
+
+      .toc-list {
+        grid-template-columns: 1fr;
+      }
+
+      .document {
+        padding: 25px 20px;
+        border-radius: 20px;
+      }
+
+      .section {
+        padding: 25px 0;
+      }
+
+      .section p,
+      .section li {
+        font-size: 14px;
+      }
+
+      .footer-inner {
+        padding: 28px 0;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .footer-right {
+        text-align: left;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      * {
+        transition: none !important;
+      }
     }
   </style>
 </head>
+
 <body>
-  <div class="card">
-    <h1>سياسة الخصوصية</h1>
-    <div class="meta">آخر تحديث: سبتمبر 2026 | منصة سارة فيا (SARAVIA)</div>
-    
-    <p>نحن في منصة سارة فيا (SARAVIA) نؤمن بأن الخصوصية حق أصيل لعملائنا. توضح هذه السياسة كيف نتعامل بكل أمان وشفافية مع بياناتك الشخصية عند استخدامك لتطبيقنا المتكامل عبر شبكة Pi Network.</p>
-    
-    <h2>1. البيانات التي يتم جمعها</h2>
-    <p>عند المصادقة عبر شبكة Pi، نجمع فقط اسم المستخدم (Username)، ومعرف المستخدم الفريد (UID)، وعنوان المحفظة (Wallet Address) بهدف إدارة الجلسات وإتمام المعاملات الفاخرة بأمان تان.</p>
-    
-    <h2>2. استخدام البيانات</h2>
-    <p>تُستخدم بياناتك حصرياً لتوفير خدمات السفر الراقي، حجز الطيران الخاص والفنادق، وإدارة سجل الحجوزات والمعاملات المرتبطة بنظام الدفع في المنصة.</p>
-    
-    <a href="./index.html" class="back-link">← العودة إلى الرئيسية</a>
-  </div>
+
+  <!-- =========================
+       HEADER
+  ========================= -->
+
+  <header class="site-header">
+    <div class="header-inner">
+
+      <a
+        class="brand"
+        href="/"
+        aria-label="SARAVIA Home"
+      >
+        <div class="brand-mark">S</div>
+
+        <div>
+          <div class="brand-name">SARAVIA</div>
+          <div class="brand-subtitle">Travel &amp; Concierge</div>
+        </div>
+      </a>
+
+      <div class="header-label">
+        Privacy &amp; Trust
+      </div>
+
+    </div>
+  </header>
+
+
+  <!-- =========================
+       HERO
+  ========================= -->
+
+  <main>
+
+    <section class="hero">
+      <div class="hero-inner">
+
+        <div class="eyebrow">
+          Privacy &amp; Trust
+        </div>
+
+        <h1>
+          Privacy Policy
+          <span>Built around trust.</span>
+        </h1>
+
+        <p class="hero-description">
+          This Privacy Policy explains how SARAVIA may collect, use,
+          protect, retain, and manage information in connection with
+          its digital platform, travel services, concierge experiences,
+          and related technologies.
+        </p>
+
+        <div class="hero-meta">
+          <span class="meta-pill">Privacy</span>
+          <span class="meta-pill">Data Protection</span>
+          <span class="meta-pill">User Trust</span>
+          <span class="meta-pill">SARAVIA</span>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- =========================
+         CONTENT
+    ========================= -->
+
+    <div class="content-wrapper">
+
+      <!-- TABLE OF CONTENTS -->
+
+      <aside class="toc" aria-label="Privacy Policy navigation">
+
+        <div class="toc-title">
+          Contents
+        </div>
+
+        <nav>
+          <ul class="toc-list">
+
+            <li>
+              <a href="#scope">
+                Scope of this Policy
+              </a>
+            </li>
+
+            <li>
+              <a href="#information">
+                Information We May Collect
+              </a>
+            </li>
+
+            <li>
+              <a href="#pi-network">
+                Pi Network Integration
+              </a>
+            </li>
+
+            <li>
+              <a href="#use">
+                How We May Use Information
+              </a>
+            </li>
+
+            <li>
+              <a href="#sharing">
+                Information Sharing
+              </a>
+            </li>
+
+            <li>
+              <a href="#security">
+                Information Security
+              </a>
+            </li>
+
+            <li>
+              <a href="#retention">
+                Data Retention
+              </a>
+            </li>
+
+            <li>
+              <a href="#rights">
+                User Rights
+              </a>
+            </li>
+
+            <li>
+              <a href="#cookies">
+                Cookies &amp; Similar Technologies
+              </a>
+            </li>
+
+            <li>
+              <a href="#changes">
+                Policy Changes
+              </a>
+            </li>
+
+            <li>
+              <a href="#contact">
+                Contact
+              </a>
+            </li>
+
+          </ul>
+        </nav>
+
+      </aside>
+
+
+      <!-- DOCUMENT -->
+
+      <article class="document">
+
+        <div class="document-intro">
+
+          <p>
+            SARAVIA is designed around a premium, technology-enabled
+            travel experience. Protecting personal information is an
+            important part of building that experience. This policy
+            describes the general principles that may apply when you
+            interact with SARAVIA through its website, applications,
+            services, booking flows, concierge experiences, or other
+            digital products.
+          </p>
+
+        </div>
+
+
+        <!-- SECTION 01 -->
+
+        <section class="section" id="scope">
+
+          <span class="section-number">01</span>
+
+          <h2>
+            Scope of this Policy
+          </h2>
+
+          <p>
+            This Privacy Policy applies to information that may be
+            processed through SARAVIA's digital products and services,
+            including travel discovery, reservations, transportation,
+            concierge services, customer support, account management,
+            payment-related functionality, and other features made
+            available through the platform.
+          </p>
+
+          <p>
+            Certain services may be subject to additional privacy
+            notices, terms, or disclosures provided at the point of
+            collection or within the relevant service.
+          </p>
+
+        </section>
+
+
+        <!-- SECTION 02 -->
+
+        <section class="section" id="information">
+
+          <span class="section-number">02</span>
+
+          <h2>
+            Information We May Collect
+          </h2>
+
+          <p>
+            Depending on how you use SARAVIA, the information processed
+            may include categories such as:
+          </p>
+
+          <ul>
+            <li>
+              Account information, such as your name, email address,
+              telephone number, and account credentials.
+            </li>
+
+            <li>
+              Travel information, including destinations, dates,
+              preferences, reservations, and service requirements.
+            </li>
+
+            <li>
+              Transaction and payment-related information required to
+              process purchases, reservations, refunds, or other
+              authorized transactions.
+            </li>
+
+            <li>
+              Device and technical information, such as browser type,
+              operating system, IP address, device identifiers, and
+              technical logs.
+            </li>
+
+            <li>
+              Usage information concerning interactions with the
+              platform, features, pages, and services.
+            </li>
+
+            <li>
+              Information that you voluntarily provide when contacting
+              customer support, requesting concierge assistance, or
+              submitting feedback.
+            </li>
+          </ul>
+
+          <div class="highlight">
+
+            <div class="highlight-title">
+              Data Minimization
+            </div>
+
+            <p>
+              SARAVIA should seek to process information that is
+              reasonably relevant to the service being provided and
+              avoid collecting information that is unnecessary for
+              the stated purpose.
+            </p>
+
+          </div>
+
+        </section>
+
+
+        <!-- SECTION 03 -->
+
+        <section class="section" id="pi-network">
+
+          <span class="section-number">03</span>
+
+          <h2>
+            Pi Network Integration
+          </h2>
+
+          <p>
+            Where SARAVIA provides functionality connected to
+            <strong>Pi Network</strong>, certain information may be
+            processed to support authentication, account association,
+            transaction functionality, or other features enabled by
+            the integration.
+          </p>
+
+          <p>
+            Depending on the specific functionality implemented,
+            information may be exchanged between SARAVIA and relevant
+            Pi Network services or infrastructure in accordance with
+            the applicable technical requirements and permissions.
+          </p>
+
+          <p>
+            Users should review the applicable policies and terms of
+            any third-party network or service before using an
+            integrated feature.
+          </p>
+
+        </section>
+
+
+        <!-- SECTION 04 -->
+
+        <section class="section" id="use">
+
+          <span class="section-number">04</span>
+
+          <h2>
+            How We May Use Information
+          </h2>
+
+          <p>
+            Information may be used for legitimate operational,
+            contractual, security, and service-related purposes,
+            including:
+          </p>
+
+          <ul>
+
+            <li>
+              Creating and managing user accounts.
+            </li>
+
+            <li>
+              Providing travel, booking, transportation, concierge,
+              and related services.
+            </li>
+
+            <li>
+              Processing authorized transactions and service requests.
+            </li>
+
+            <li>
+              Personalizing relevant experiences, recommendations,
+              and service interactions.
+            </li>
+
+            <li>
+              Communicating with users regarding accounts,
+              reservations, transactions, service updates, and
+              support requests.
+            </li>
+
+            <li>
+              Maintaining platform functionality, reliability,
+              performance, and security.
+            </li>
+
+            <li>
+              Detecting, investigating, and preventing fraud,
+              abuse, unauthorized access, and other security risks.
+            </li>
+
+            <li>
+              Improving products, services, user experience, and
+              platform operations.
+            </li>
+
+            <li>
+              Complying with applicable legal, regulatory, and
+              contractual obligations.
+            </li>
+
+          </ul>
+
+        </section>
+
+
+        <!-- SECTION 05 -->
+
+        <section class="section" id="sharing">
+
+          <span class="section-number">05</span>
+
+          <h2>
+            Information Sharing
+          </h2>
+
+          <p>
+            SARAVIA may share or disclose information where reasonably
+            necessary to operate its services, fulfill a user's request,
+            protect users and the platform, or comply with applicable
+            obligations.
+          </p>
+
+          <p>
+            Depending on the service, relevant information may be
+            provided to categories of recipients such as:
+          </p>
+
+          <ul>
+
+            <li>
+              Travel providers, accommodation partners, transportation
+              providers, and other service providers involved in a
+              requested booking or experience.
+            </li>
+
+            <li>
+              Payment processors and financial service providers
+              involved in authorized transactions.
+            </li>
+
+            <li>
+              Technology, hosting, analytics, security, customer
+              support, and infrastructure providers acting on behalf
+              of the platform.
+            </li>
+
+            <li>
+              Relevant third-party platforms or networks where a user
+              has requested or authorized an integrated service.
+            </li>
+
+            <li>
+              Government authorities, regulators, courts, or other
+              parties where disclosure is required or permitted by
+              applicable law.
+            </li>
+
+          </ul>
+
+          <p>
+            SARAVIA does not treat user information as a commodity to
+            be sold simply for its own sake. Any disclosure should be
+            considered in the context of the applicable service,
+            legal basis, user request, or operational requirement.
+          </p>
+
+        </section>
+
+
+        <!-- SECTION 06 -->
+
+        <section class="section" id="security">
+
+          <span class="section-number">06</span>
+
+          <h2>
+            Information Security
+          </h2>
+
+          <p>
+            SARAVIA is intended to use appropriate technical and
+            organizational safeguards designed to reduce the risk of
+            unauthorized access, alteration, disclosure, loss, or
+            destruction of information.
+          </p>
+
+          <p>
+            Security measures may include access controls, encryption
+            where appropriate, authentication mechanisms, monitoring,
+            secure infrastructure, logging, and other protective
+            technologies and procedures.
+          </p>
+
+          <div class="highlight">
+
+            <div class="highlight-title">
+              Important Security Notice
+            </div>
+
+            <p>
+              No internet-connected system, transmission method, or
+              storage environment can be guaranteed to be completely
+              secure. Users should also take reasonable steps to
+              protect their credentials, devices, and account access.
+            </p>
+
+          </div>
+
+        </section>
+
+
+        <!-- SECTION 07 -->
+
+        <section class="section" id="retention">
+
+          <span class="section-number">07</span>
+
+          <h2>
+            Data Retention
+          </h2>
+
+          <p>
+            Information may be retained for as long as reasonably
+            necessary to provide requested services, maintain business
+            and transaction records, resolve disputes, enforce
+            applicable agreements, prevent abuse, meet legal or
+            regulatory requirements, or otherwise fulfill legitimate
+            operational purposes.
+          </p>
+
+          <p>
+            Retention periods may vary depending on the type of
+            information, the purpose for which it was collected, and
+            applicable legal or contractual requirements.
+          </p>
+
+        </section>
+
+
+        <!-- SECTION 08 -->
+
+        <section class="section" id="rights">
+
+          <span class="section-number">08</span>
+
+          <h2>
+            User Rights
+          </h2>
+
+          <p>
+            Depending on the jurisdiction in which you are located,
+            you may have rights concerning your personal information.
+            These may include, where applicable:
+          </p>
+
+          <ul>
+
+            <li>
+              Requesting access to personal information held about you.
+            </li>
+
+            <li>
+              Requesting correction of inaccurate or incomplete
+              information.
+            </li>
+
+            <li>
+              Requesting deletion of information where legally
+              applicable.
+            </li>
+
+            <li>
+              Requesting restriction of certain processing activities.
+            </li>
+
+            <li>
+              Objecting to certain forms of processing where applicable.
+            </li>
+
+            <li>
+              Requesting portability of certain information where
+              applicable.
+            </li>
+
+            <li>
+              Withdrawing consent where processing is based on consent,
+              subject to applicable limitations.
+            </li>
+
+          </ul>
+
+          <p>
+            Requests may be subject to identity verification and
+            applicable legal limitations.
+          </p>
+
+        </section>
+
+
+        <!-- SECTION 09 -->
+
+        <section class="section" id="cookies">
+
+          <span class="section-number">09</span>
+
+          <h2>
+            Cookies &amp; Similar Technologies
+          </h2>
+
+          <p>
+            SARAVIA may use cookies, local storage, pixels, analytics
+            technologies, and similar mechanisms to support essential
+            functionality, remember preferences, understand platform
+            usage, improve performance, and enhance the user experience.
+          </p>
+
+          <p>
+            Depending on the technologies implemented and the
+            jurisdiction involved, users may have options to manage
+            certain cookies or similar technologies through browser,
+            device, or platform settings.
+          </p>
+
+        </section>
+
+
+        <!-- SECTION 10 -->
+
+        <section class="section" id="changes">
+
+          <span class="section-number">10</span>
+
+          <h2>
+            Changes to this Privacy Policy
+          </h2>
+
+          <p>
+            SARAVIA may update this Privacy Policy from time to time
+            to reflect changes in services, technologies, operational
+            practices, legal requirements, or other relevant
+            circumstances.
+          </p>
+
+          <p>
+            When material changes are made, the updated version may be
+            presented through the platform or other appropriate
+            communication channels. The effective date should be
+            reviewed whenever this policy is updated.
+          </p>
+
+          <div class="highlight">
+
+            <div class="highlight-title">
+              Current Version
+            </div>
+
+            <p>
+              This page represents the current published version of
+              the SARAVIA Privacy Policy. The effective date should be
+              added and maintained by SARAVIA before production launch.
+            </p>
+
+          </div>
+
+        </section>
+
+
+        <!-- SECTION 11 -->
+
+        <section class="section" id="contact">
+
+          <span class="section-number">11</span>
+
+          <h2>
+            Contact
+          </h2>
+
+          <p>
+            If you have questions regarding this Privacy Policy,
+            personal information, data requests, or privacy practices,
+            please contact SARAVIA through the official contact
+            channel provided within the platform.
+          </p>
+
+          <div class="contact-card">
+
+            <div class="contact-label">
+              Privacy &amp; Data Protection
+            </div>
+
+            <div class="contact-value">
+              SARAVIA
+            </div>
+
+          </div>
+
+        </section>
+
+      </article>
+
+    </div>
+
+  </main>
+
+
+  <!-- =========================
+       FOOTER
+  ========================= -->
+
+  <footer class="site-footer">
+
+    <div class="footer-inner">
+
+      <div>
+        <div class="footer-brand">
+          SARAVIA
+        </div>
+
+        <div class="footer-caption">
+          Travel &amp; Concierge
+        </div>
+      </div>
+
+      <div class="footer-right">
+        Privacy &amp; Trust<br />
+        © SARAVIA. All rights reserved.
+      </div>
+
+    </div>
+
+  </footer>
+
 </body>
-</html>
+            </html>
