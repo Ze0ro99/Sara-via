@@ -1,83 +1,1094 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>شروط الخدمة · SARAVIA</title>
+
+  <meta name="description" content="SARAVIA Terms of Service — Terms governing access to and use of the SARAVIA premium travel, concierge, payment and digital services platform.">
+  <meta name="robots" content="index, follow">
+
+  <title>Terms of Service · SARAVIA</title>
+
   <style>
     :root {
-      --bg-deep: #0a0b0d;
-      --card-bg: #13151a;
-      --gold-primary: #eab308;
-      --gold-light: #fef08a;
-      --text-main: #f3f4f6;
-      --text-muted: #9ca3af;
-      --border-color: rgba(234, 179, 8, 0.2);
+      --bg: #080909;
+      --bg-soft: #0d0e0f;
+      --surface: #111213;
+      --surface-2: #151617;
+      --line: rgba(220, 190, 125, 0.18);
+      --line-strong: rgba(220, 190, 125, 0.32);
+      --gold: #d8b66a;
+      --gold-soft: #ead39b;
+      --text: #f4f1e9;
+      --muted: #aaa69c;
+      --muted-2: #817d74;
+      --white: #ffffff;
+      --radius: 18px;
+      --max: 1240px;
     }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      background-color: var(--bg-deep);
-      color: var(--text-main);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-      line-height: 1.8;
-      padding: 3rem 1.5rem;
-      max-width: 900px;
+      background:
+        radial-gradient(circle at 85% 5%, rgba(216, 182, 106, 0.06), transparent 28%),
+        radial-gradient(circle at 10% 90%, rgba(216, 182, 106, 0.035), transparent 25%),
+        var(--bg);
+      color: var(--text);
+      font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Helvetica,
+        Arial,
+        sans-serif;
+      line-height: 1.75;
+      min-height: 100vh;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    a:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 4px;
+      border-radius: 4px;
+    }
+
+    .skip-link {
+      position: fixed;
+      top: -100px;
+      left: 20px;
+      z-index: 999;
+      padding: 10px 16px;
+      background: var(--gold);
+      color: #090909;
+      border-radius: 8px;
+      font-weight: 700;
+    }
+
+    .skip-link:focus {
+      top: 20px;
+    }
+
+    .container {
+      width: min(calc(100% - 40px), var(--max));
       margin: 0 auto;
     }
-    .card {
-      background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 20px;
-      padding: 2.5rem;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid var(--line);
+      background: rgba(8, 9, 9, 0.88);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
     }
+
+    .nav {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      font-size: 14px;
+    }
+
+    .brand-mark {
+      width: 30px;
+      height: 30px;
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: var(--gold);
+      font-size: 11px;
+      letter-spacing: 0;
+    }
+
+    .brand span:last-child {
+      color: var(--gold-soft);
+    }
+
+    .nav-label {
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .hero {
+      padding: 100px 0 70px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      color: var(--gold);
+      font-size: 11px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+
     h1 {
-      color: var(--gold-primary);
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
-      border-bottom: 2px solid var(--border-color);
-      padding-bottom: 1rem;
+      max-width: 850px;
+      font-size: clamp(42px, 7vw, 82px);
+      line-height: 0.98;
+      letter-spacing: -0.045em;
+      font-weight: 600;
+      margin-bottom: 26px;
     }
-    h2 {
-      color: var(--gold-light);
-      font-size: 1.25rem;
-      margin-top: 2rem;
+
+    .hero-description {
+      max-width: 720px;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.8;
     }
-    p, li {
-      color: var(--text-muted);
-      margin-bottom: 1rem;
+
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 34px;
     }
+
     .meta {
-      font-size: 0.9rem;
-      color: var(--gold-primary);
-      margin-bottom: 2rem;
+      padding: 9px 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 12px;
+      background: rgba(255,255,255,0.015);
     }
-    .back-link {
-      display: inline-block;
-      margin-top: 2.5rem;
-      color: var(--gold-primary);
-      text-decoration: none;
-      font-weight: bold;
-      transition: opacity 0.2s;
+
+    .meta strong {
+      color: var(--gold-soft);
+      font-weight: 600;
     }
-    .back-link:hover {
-      opacity: 0.8;
+
+    .layout {
+      display: grid;
+      grid-template-columns: 250px minmax(0, 1fr);
+      gap: 56px;
+      padding: 70px 0 100px;
+      align-items: start;
+    }
+
+    .toc {
+      position: sticky;
+      top: 105px;
+      border-left: 1px solid var(--line);
+      padding-left: 20px;
+    }
+
+    .toc-title {
+      color: var(--gold);
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+      font-weight: 700;
+    }
+
+    .toc a {
+      display: block;
+      padding: 6px 0;
+      color: var(--muted-2);
+      font-size: 12px;
+      transition: color 0.2s ease;
+    }
+
+    .toc a:hover {
+      color: var(--gold-soft);
+    }
+
+    .document {
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255,255,255,0.025),
+          rgba(255,255,255,0.008)
+        );
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .document-header {
+      padding: 30px 34px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255,255,255,0.012);
+    }
+
+    .document-header p {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .section {
+      padding: 42px 34px;
+      border-bottom: 1px solid var(--line);
+      scroll-margin-top: 100px;
+    }
+
+    .section:last-child {
+      border-bottom: 0;
+    }
+
+    .section-number {
+      color: var(--gold);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      font-weight: 700;
+      margin-bottom: 9px;
+    }
+
+    h2 {
+      font-size: 24px;
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+      margin-bottom: 18px;
+      font-weight: 600;
+    }
+
+    h3 {
+      font-size: 16px;
+      color: var(--gold-soft);
+      margin: 26px 0 10px;
+    }
+
+    p {
+      color: #c4c0b7;
+      font-size: 14px;
+      margin-bottom: 14px;
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+
+    ul {
+      margin: 14px 0 16px 20px;
+      color: #c4c0b7;
+    }
+
+    li {
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+
+    strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .notice {
+      margin-top: 22px;
+      padding: 20px;
+      border: 1px solid var(--line-strong);
+      border-radius: 14px;
+      background: rgba(216, 182, 106, 0.045);
+    }
+
+    .notice p {
+      color: #d0cbc0;
+    }
+
+    .placeholder {
+      color: var(--gold-soft);
+      border-bottom: 1px dashed rgba(216, 182, 106, 0.5);
+    }
+
+    .payment-box {
+      margin-top: 24px;
+      padding: 24px;
+      border: 1px solid var(--line-strong);
+      border-radius: 16px;
+      background:
+        linear-gradient(
+          135deg,
+          rgba(216,182,106,0.065),
+          rgba(255,255,255,0.01)
+        );
+    }
+
+    .payment-box-title {
+      color: var(--gold);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 42px 0 50px;
+    }
+
+    .footer-grid {
+      display: flex;
+      justify-content: space-between;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .footer-brand {
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      color: var(--gold-soft);
+      font-size: 13px;
+    }
+
+    .footer-note {
+      max-width: 580px;
+      color: var(--muted-2);
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .footer-bottom {
+      margin-top: 28px;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+      color: var(--muted-2);
+      font-size: 11px;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 900px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .toc {
+        position: static;
+        border-left: 0;
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+        padding: 20px 0;
+      }
+
+      .toc a {
+        display: inline-block;
+        margin-right: 18px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        width: min(calc(100% - 28px), var(--max));
+      }
+
+      .hero {
+        padding: 70px 0 50px;
+      }
+
+      h1 {
+        font-size: 46px;
+      }
+
+      .hero-description {
+        font-size: 16px;
+      }
+
+      .layout {
+        padding: 45px 0 70px;
+      }
+
+      .section {
+        padding: 32px 22px;
+      }
+
+      .document-header {
+        padding: 24px 22px;
+      }
+
+      .nav-label {
+        display: none;
+      }
     }
   </style>
 </head>
+
 <body>
-  <div class="card">
-    <h1>شروط الخدمة</h1>
-    <div class="meta">آخر تحديث: سبتمبر 2026 | منصة سارة فيا (SARAVIA)</div>
-    
-    <p>أهلاً بك في منصة سارة فيا (SARAVIA). باستخدامك لتطبيقنا اللامركزي على شبكة Pi Network، فإنك توافق التزاماً تاماً بهذه الشروط والأحكام.</p>
-    
-    <h2>1. المعاملات والمدفوعات</h2>
-    <p>تتم كافة عمليات المصادقة والدفع داخل المنصة عبر بروتوكول Pi Network SDK. المعاملات على الشبكة الرئيسية نهائية وغير قابلة للاسترداد.</p>
-    
-    <h2>2. الحجوزات والخدمات الفاخرة</h2>
-    <p>توفر المنصة خدمات السفر، الطيران الخاص، والخدمات اللوجستية. يتم تأكيد الحجز وإلغاء قفل الخدمات حصرياً بعد التحقق التام ونجاح معالجة الدفع عبر النظام.</p>
-    
-    <a href="./index.html" class="back-link">← العودة إلى الرئيسية</a>
-  </div>
+
+  <a class="skip-link" href="#main-content">
+    Skip to content
+  </a>
+
+  <header>
+    <div class="container nav">
+      <a href="/" class="brand" aria-label="SARAVIA Home">
+        <span class="brand-mark">S</span>
+        <span>SARAVIA</span>
+      </a>
+
+      <span class="nav-label">
+        Terms of Service
+      </span>
+    </div>
+  </header>
+
+  <main id="main-content">
+
+    <section class="hero">
+      <div class="container">
+
+        <div class="eyebrow">
+          SARAVIA · Legal
+        </div>
+
+        <h1>
+          Terms of Service
+        </h1>
+
+        <p class="hero-description">
+          The terms governing access to and use of the SARAVIA platform,
+          travel services, concierge experiences, digital services,
+          payments and related technologies.
+        </p>
+
+        <div class="meta-row">
+          <div class="meta">
+            <strong>Operator:</strong> Sara Moustafa
+          </div>
+
+          <div class="meta">
+            <strong>Country:</strong> Türkiye
+          </div>
+
+          <div class="meta">
+            <strong>Primary Payment:</strong> Pi
+          </div>
+
+          <div class="meta">
+            <strong>Status:</strong> Digital Platform
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <div class="container layout">
+
+      <aside class="toc" aria-label="Table of contents">
+        <div class="toc-title">
+          Contents
+        </div>
+
+        <a href="#acceptance">01 · Acceptance</a>
+        <a href="#platform">02 · Platform</a>
+        <a href="#eligibility">03 · Eligibility</a>
+        <a href="#accounts">04 · Accounts</a>
+        <a href="#services">05 · Services</a>
+        <a href="#providers">06 · Providers</a>
+        <a href="#bookings">07 · Bookings</a>
+        <a href="#payments">08 · Payments</a>
+        <a href="#pi">09 · Pi Network</a>
+        <a href="#acceptable-use">10 · Acceptable Use</a>
+        <a href="#intellectual-property">11 · Intellectual Property</a>
+        <a href="#user-content">12 · User Content</a>
+        <a href="#availability">13 · Availability</a>
+        <a href="#termination">14 · Termination</a>
+        <a href="#disclaimers">15 · Disclaimers</a>
+        <a href="#liability">16 · Liability</a>
+        <a href="#indemnification">17 · Indemnification</a>
+        <a href="#privacy">18 · Privacy</a>
+        <a href="#changes">19 · Changes</a>
+        <a href="#contact">20 · Contact</a>
+      </aside>
+
+      <article class="document">
+
+        <div class="document-header">
+          <p>
+            These Terms of Service establish the framework for using SARAVIA.
+            Certain legal and commercial details may be updated as the
+            SARAVIA operating entity, service portfolio and payment
+            infrastructure are formally established.
+          </p>
+        </div>
+
+        <section class="section" id="acceptance">
+          <div class="section-number">01</div>
+          <h2>Acceptance of Terms</h2>
+
+          <p>
+            By accessing, browsing, registering for, or using SARAVIA,
+            you acknowledge that you have read, understood and agreed
+            to these Terms of Service.
+          </p>
+
+          <p>
+            If you do not agree with these Terms, you should not use
+            the SARAVIA platform or its services.
+          </p>
+
+          <div class="notice">
+            <p>
+              SARAVIA is operated from <strong>Türkiye</strong> by
+              <strong>Sara Moustafa</strong>, subject to the final
+              establishment and disclosure of the applicable legal
+              operating entity.
+            </p>
+          </div>
+        </section>
+
+        <section class="section" id="platform">
+          <div class="section-number">02</div>
+          <h2>SARAVIA Platform</h2>
+
+          <p>
+            SARAVIA is a premium digital travel and concierge platform
+            designed to connect users with travel planning, booking,
+            hospitality, transportation, destination services,
+            digital experiences and related solutions.
+          </p>
+
+          <p>
+            Depending on availability and applicable markets, SARAVIA
+            may provide or facilitate access to services including:
+          </p>
+
+          <ul>
+            <li>International and domestic travel services.</li>
+            <li>Hotels, resorts and accommodation.</li>
+            <li>Private and premium transportation.</li>
+            <li>Travel concierge and itinerary services.</li>
+            <li>Destination discovery and recommendations.</li>
+            <li>Visa-related information and assistance.</li>
+            <li>Shipping, logistics and customs-related services.</li>
+            <li>Digital payment and Web3-enabled services.</li>
+          </ul>
+
+          <p>
+            The availability of any individual service may vary by
+            country, provider, regulatory requirements and operational
+            conditions.
+          </p>
+        </section>
+
+        <section class="section" id="eligibility">
+          <div class="section-number">03</div>
+          <h2>Eligibility</h2>
+
+          <p>
+            You must have the legal capacity required by the laws
+            applicable to you to enter into these Terms and use the
+            services provided through SARAVIA.
+          </p>
+
+          <p>
+            Certain services may be subject to additional eligibility
+            requirements imposed by airlines, hotels, transportation
+            providers, payment providers, governments or other
+            third-party service providers.
+          </p>
+        </section>
+
+        <section class="section" id="accounts">
+          <div class="section-number">04</div>
+          <h2>Accounts & Security</h2>
+
+          <p>
+            Certain SARAVIA services may require an account,
+            authentication or identity verification.
+          </p>
+
+          <p>
+            You are responsible for maintaining the confidentiality
+            of your account credentials and for activities performed
+            through your account, except where applicable law provides
+            otherwise.
+          </p>
+
+          <p>
+            SARAVIA may introduce additional authentication technologies,
+            including Web3 or blockchain-based authentication where
+            supported.
+          </p>
+        </section>
+
+        <section class="section" id="services">
+          <div class="section-number">05</div>
+          <h2>Travel & Concierge Services</h2>
+
+          <p>
+            SARAVIA may provide travel planning, booking assistance,
+            concierge coordination and access to third-party travel
+            services.
+          </p>
+
+          <p>
+            Service availability, pricing, schedules, inventory and
+            conditions may change without notice before a booking is
+            confirmed.
+          </p>
+
+          <p>
+            Certain services may require additional terms imposed by
+            the relevant service provider.
+          </p>
+        </section>
+
+        <section class="section" id="providers">
+          <div class="section-number">06</div>
+          <h2>Third-Party Providers</h2>
+
+          <p>
+            SARAVIA may work with independent third-party providers,
+            including airlines, hotels, resorts, transportation
+            companies, payment providers, technology providers,
+            logistics companies and other service partners.
+          </p>
+
+          <p>
+            Third-party providers may establish their own terms,
+            restrictions, cancellation rules, availability requirements
+            and pricing conditions.
+          </p>
+
+          <p>
+            Where a third party directly provides a service, that
+            provider may remain responsible for the actual delivery
+            of that service.
+          </p>
+        </section>
+
+        <section class="section" id="bookings">
+          <div class="section-number">07</div>
+          <h2>Bookings & Reservations</h2>
+
+          <p>
+            A booking is considered confirmed only when SARAVIA or the
+            applicable provider confirms the transaction according to
+            the relevant booking process.
+          </p>
+
+          <p>
+            Users are responsible for providing accurate information,
+            including names, identification details, travel dates,
+            contact information and other information required to
+            complete a booking.
+          </p>
+
+          <p>
+            Booking-specific cancellation, modification, refund and
+            no-show conditions may apply depending on the selected
+            service.
+          </p>
+
+          <p>
+            SARAVIA may introduce dedicated cancellation and refund
+            policies that supplement these Terms.
+          </p>
+        </section>
+
+        <section class="section" id="payments">
+          <div class="section-number">08</div>
+          <h2>Payments & Transactions</h2>
+
+          <p>
+            SARAVIA is designed to support digital payments across its
+            ecosystem, with <strong>Pi (Pi Network)</strong> intended
+            as the platform's primary digital payment currency.
+          </p>
+
+          <div class="payment-box">
+            <div class="payment-box-title">
+              Payment Architecture
+            </div>
+
+            <p>
+              <strong>Primary currency:</strong> Pi
+            </p>
+
+            <p>
+              <strong>Additional currencies:</strong>
+              SARAVIA may support other currencies or payment methods
+              where available and legally permitted.
+            </p>
+
+            <p>
+              The availability of any payment method may depend on
+              country, service, provider, regulatory requirements,
+              technical infrastructure and transaction availability.
+            </p>
+          </div>
+
+          <p>
+            Prices may be displayed or settled in Pi or another
+            supported currency depending on the applicable service.
+          </p>
+
+          <p>
+            Where currency conversion is required, the applicable
+            exchange rate, conversion mechanism or payment-provider
+            terms may apply.
+          </p>
+
+          <p>
+            SARAVIA may introduce separate payment, refund and
+            cancellation policies describing transaction-specific
+            conditions in greater detail.
+          </p>
+        </section>
+
+        <section class="section" id="pi">
+          <div class="section-number">09</div>
+          <h2>Pi Network Integration</h2>
+
+          <p>
+            SARAVIA may integrate with the <strong>Pi Network</strong>
+            ecosystem for authentication, payments, digital transactions
+            and other supported Web3 functionality.
+          </p>
+
+          <p>
+            Pi may serve as the primary payment currency within the
+            SARAVIA ecosystem, subject to technical availability,
+            applicable rules and the capabilities of the relevant
+            Pi Network infrastructure.
+          </p>
+
+          <p>
+            Transactions involving Pi may depend on external network
+            infrastructure, wallet functionality, transaction
+            confirmation, network conditions, technical updates,
+            applicable fees and other factors outside the direct
+            control of SARAVIA.
+          </p>
+
+          <p>
+            Users are responsible for using compatible wallets and
+            following applicable security practices when interacting
+            with Pi-related functionality.
+          </p>
+
+          <div class="notice">
+            <p>
+              SARAVIA does not represent that the use or holding of Pi
+              constitutes an investment opportunity, nor do these Terms
+              constitute financial, investment, tax or legal advice.
+            </p>
+          </div>
+        </section>
+
+        <section class="section" id="acceptable-use">
+          <div class="section-number">10</div>
+          <h2>Acceptable Use</h2>
+
+          <p>
+            You agree not to misuse SARAVIA or use the platform for
+            unlawful, fraudulent or unauthorized purposes.
+          </p>
+
+          <ul>
+            <li>
+              Do not attempt to gain unauthorized access to systems,
+              accounts or infrastructure.
+            </li>
+            <li>
+              Do not interfere with the security or operation of the
+              platform.
+            </li>
+            <li>
+              Do not submit knowingly false or misleading information.
+            </li>
+            <li>
+              Do not use SARAVIA for activities prohibited by applicable law.
+            </li>
+            <li>
+              Do not attempt to manipulate payment, booking or
+              transaction systems.
+            </li>
+          </ul>
+        </section>
+
+        <section class="section" id="intellectual-property">
+          <div class="section-number">11</div>
+          <h2>Intellectual Property</h2>
+
+          <p>
+            Unless otherwise stated, SARAVIA's branding, interface,
+            software, visual identity, text, graphics, databases,
+            original content and platform architecture are protected
+            by applicable intellectual property laws.
+          </p>
+
+          <p>
+            SARAVIA, its name, logos and associated brand elements may
+            not be copied, reproduced, modified, distributed or used
+            without appropriate authorization.
+          </p>
+        </section>
+
+        <section class="section" id="user-content">
+          <div class="section-number">12</div>
+          <h2>User Content</h2>
+
+          <p>
+            If SARAVIA allows users to submit reviews, feedback,
+            photographs, messages or other content, users remain
+            responsible for the legality and accuracy of that content.
+          </p>
+
+          <p>
+            By submitting content, you grant SARAVIA the rights
+            reasonably necessary to host, process, display and operate
+            the relevant service, subject to applicable law and the
+            SARAVIA Privacy Policy.
+          </p>
+        </section>
+
+        <section class="section" id="availability">
+          <div class="section-number">13</div>
+          <h2>Availability & Changes</h2>
+
+          <p>
+            SARAVIA may update, modify, suspend or discontinue features,
+            services or parts of the platform as the product evolves.
+          </p>
+
+          <p>
+            The platform may occasionally be unavailable because of
+            maintenance, technical issues, network conditions,
+            third-party dependencies or circumstances beyond SARAVIA's
+            reasonable control.
+          </p>
+        </section>
+
+        <section class="section" id="termination">
+          <div class="section-number">14</div>
+          <h2>Suspension & Termination</h2>
+
+          <p>
+            SARAVIA may restrict, suspend or terminate access where
+            reasonably necessary to protect the platform, users,
+            providers, payment systems or legal compliance.
+          </p>
+
+          <p>
+            Users may stop using the platform at any time, subject to
+            obligations relating to previously confirmed bookings,
+            payments or other transactions.
+          </p>
+        </section>
+
+        <section class="section" id="disclaimers">
+          <div class="section-number">15</div>
+          <h2>Disclaimers</h2>
+
+          <p>
+            SARAVIA provides a digital platform and service environment.
+            Specific travel, transportation, accommodation, payment
+            and third-party services may be provided by independent
+            providers.
+          </p>
+
+          <p>
+            To the extent permitted by applicable law, SARAVIA does not
+            guarantee uninterrupted availability, permanent pricing,
+            uninterrupted third-party services or the availability of
+            specific travel inventory.
+          </p>
+
+          <p>
+            Nothing in these Terms excludes rights or protections that
+            cannot lawfully be excluded under applicable law.
+          </p>
+        </section>
+
+        <section class="section" id="liability">
+          <div class="section-number">16</div>
+          <h2>Limitation of Liability</h2>
+
+          <p>
+            To the maximum extent permitted by applicable law, SARAVIA's
+            liability in connection with the platform and services will
+            be limited to the extent permitted under the applicable
+            legal framework and the specific nature of the relevant
+            transaction.
+          </p>
+
+          <p>
+            Nothing in these Terms limits liability where such limitation
+            is prohibited by applicable law.
+          </p>
+        </section>
+
+        <section class="section" id="indemnification">
+          <div class="section-number">17</div>
+          <h2>Indemnification</h2>
+
+          <p>
+            To the extent permitted by applicable law, users may be
+            responsible for losses, claims or reasonable costs arising
+            from their unlawful use of SARAVIA, violation of these Terms,
+            or misuse of the platform.
+          </p>
+        </section>
+
+        <section class="section" id="privacy">
+          <div class="section-number">18</div>
+          <h2>Privacy</h2>
+
+          <p>
+            SARAVIA's processing of personal information is governed by
+            its Privacy Policy.
+          </p>
+
+          <p>
+            The Privacy Policy explains how information may be collected,
+            used, stored, protected and processed in connection with
+            SARAVIA's services.
+          </p>
+
+          <p>
+            Users should review the Privacy Policy before using services
+            that require personal information, identity verification,
+            booking details or payment information.
+          </p>
+        </section>
+
+        <section class="section" id="changes">
+          <div class="section-number">19</div>
+          <h2>Changes to These Terms</h2>
+
+          <p>
+            SARAVIA may update these Terms as the platform, services,
+            technology, legal requirements and operating structure evolve.
+          </p>
+
+          <p>
+            When material changes are made, SARAVIA may provide notice
+            through the platform or other appropriate communication
+            channels.
+          </p>
+
+          <p>
+            Continued use of SARAVIA after an updated version becomes
+            effective may constitute acceptance of the updated Terms,
+            where permitted by applicable law.
+          </p>
+        </section>
+
+        <section class="section" id="contact">
+          <div class="section-number">20</div>
+          <h2>Contact & Legal Information</h2>
+
+          <p>
+            SARAVIA is currently operated from <strong>Türkiye</strong>
+            by <strong>Sara Moustafa</strong>.
+          </p>
+
+          <p>
+            The following legal information will be added or updated
+            when the formal operating structure is finalized:
+          </p>
+
+          <ul>
+            <li>
+              Legal entity name:
+              <span class="placeholder">To be added</span>
+            </li>
+
+            <li>
+              Registered address:
+              <span class="placeholder">To be added</span>
+            </li>
+
+            <li>
+              Official legal email:
+              <span class="placeholder">To be added</span>
+            </li>
+
+            <li>
+              Governing law:
+              <span class="placeholder">To be added</span>
+            </li>
+
+            <li>
+              Jurisdiction:
+              <span class="placeholder">To be added</span>
+            </li>
+
+            <li>
+              Effective date:
+              <span class="placeholder">To be added</span>
+            </li>
+          </ul>
+
+          <div class="notice">
+            <p>
+              These fields are intentionally left open so that SARAVIA
+              can insert the official legal information once the
+              applicable company and operating structure are finalized.
+              No unverified legal information is intentionally inserted.
+            </p>
+          </div>
+        </section>
+
+      </article>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+
+      <div class="footer-grid">
+
+        <div class="footer-brand">
+          SARAVIA
+        </div>
+
+        <div class="footer-note">
+          Premium travel. Intelligent journeys. A connected digital
+          experience designed for a new generation of global mobility.
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <span>
+          © SARAVIA. All rights reserved.
+        </span>
+
+        <span>
+          Türkiye · Digital Travel & Concierge Platform
+        </span>
+      </div>
+
+    </div>
+  </footer>
+
 </body>
 </html>
