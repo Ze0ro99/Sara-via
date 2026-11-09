@@ -8,7 +8,9 @@
     "start": "node server.js",
     "dev": "vite --port=3000 --host=0.0.0.0",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "node --test",
+    "check:syntax": "node --check server.js && node --check app.js && node --check routes/pi-auth.js && node --check routes/pi-payments.js && node --check routes/travel.js"
   },
   "engines": {
     "node": ">=20"
@@ -24,5 +26,5 @@
     "react-dom": "^19.0.0",
     "vite": "^6.0.0"
   },
-  "type": "module"
+  "type": "commonjs"
 }
