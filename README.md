@@ -9,6 +9,8 @@ SARA VIA is a travel and logistics platform prototype being prepared for **Pi Te
 - Server-side Pi user verification through `/api/auth/me`.
 - Fail-closed Pi payment approval and server-confirmed completion; incomplete-payment recovery is routed through the backend.
 - Express API mounted for local use and Netlify Functions.
+- Pi-verified, persistent booking-intent API backed by Supabase REST when configured.
+- Initial Supabase schema for booking intents, subscriptions, shipments and partner profiles.
 - Flight offer search through the Amadeus **test** API when credentials are supplied.
 - Route calculation through Google Routes API when a server-side key is supplied.
 - Provider status endpoint: `GET /api/travel/status`.
@@ -30,7 +32,7 @@ Open `http://localhost:3000`. For Pi authentication and payments, use the Pi Bro
 
 ## Environment variables
 
-See [`.env.example`](.env.example). Flight search requires `AMADEUS_CLIENT_ID` and `AMADEUS_CLIENT_SECRET` from an Amadeus test account. Route calculation requires `GOOGLE_ROUTES_API_KEY`. The keys are read only by server code.
+Apply [`supabase/migrations/001_initial_testnet_schema.sql`](supabase/migrations/001_initial_testnet_schema.sql) to your Supabase Testnet project before enabling booking intents. See [`.env.example`](.env.example). Flight search requires `AMADEUS_CLIENT_ID` and `AMADEUS_CLIENT_SECRET` from an Amadeus test account. Route calculation requires `GOOGLE_ROUTES_API_KEY`. The keys are read only by server code.
 
 ## API endpoints
 
