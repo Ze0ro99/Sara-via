@@ -9,6 +9,7 @@ const path = require('path');
 
 const piAuthRouter = require('./routes/pi-auth');
 const piPaymentsRouter = require('./routes/pi-payments');
+const travelRouter = require('./routes/travel');
 
 const app = express();
 
@@ -170,6 +171,8 @@ app.use(
   piPaymentsRouter
 );
 
+app.use('/api/travel', travelRouter);
+
 /*
 |--------------------------------------------------------------------------
 | SARA VIA Website
@@ -244,6 +247,7 @@ app.use((error, req, res, next) => {
 |--------------------------------------------------------------------------
 */
 
+if (require.main === module) {
 app.listen(PORT, HOST, () => {
   console.log('');
   console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
@@ -261,3 +265,6 @@ app.listen(PORT, HOST, () => {
   console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
   console.log('');
 });
+}
+
+module.exports = app;
