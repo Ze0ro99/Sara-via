@@ -44,17 +44,25 @@ Apply [`supabase/migrations/001_initial_testnet_schema.sql`](supabase/migrations
 | GET | `/api/travel/status` | Provider readiness |
 | POST | `/api/travel/flights/search` | Live Test API flight offers |
 | POST | `/api/travel/routes/compute` | Google route calculation |
+| POST | `/api/travel/providers/hotels/search` | Configured hotel provider search |
+| POST | `/api/travel/providers/cruises/search` | Configured cruise provider search |
+| POST | `/api/travel/providers/tours/search` | Configured tour/experience provider search |
+| POST | `/api/travel/providers/logistics/quote` | Configured transfer/logistics quote |
+| POST | `/api/travel/providers/logistics/track` | Configured carrier tracking |
+| POST | `/api/bookings/intents` | Create a Pi-verified booking intent (not a reservation confirmation) |
+| GET | `/api/bookings/intents/:id` | Read own booking intent |
+| POST | `/api/bookings/intents/:id/cancel` | Cancel an unvalidated intent |
 | GET | `/api/auth/me` | Verify Pi access token |
 | POST | `/api/payments/approve` | Verify and approve Pi payment |
 | POST | `/api/payments/complete` | Verify and complete Pi payment |
 
 ## Booking, hotel, tour and logistics roadmap
 
-The current repository does **not** yet contain a persistent booking database, hotel/tour inventory contract, partner onboarding, subscription ledger, shipment tracking provider, or deployed custom token. These are intentionally not represented as working services. They require provider agreements/API credentials, durable storage, booking state transitions, cancellation/refund policy, idempotency keys, audit records, and partner acceptance tests. Add each adapter behind server-side interfaces and only show inventory returned by the connected provider.
+The branch now includes a Supabase schema and Pi-verified booking-intent endpoints, but a booking intent is not a confirmed reservation. The database must be provisioned and configured, and provider-side offer validation/booking confirmation, payment-to-booking reconciliation, refunds and durable idempotency are still pending. Hotel, cruise, tour and logistics adapters require real provider contracts and credentials. Subscription state tables exist in the migration, but subscription billing/entitlement APIs are not yet implemented; no SARA VIA token contract is deployed.
 
 Recommended next implementation stages:
 
-1. Add PostgreSQL persistence and migrations for users, search sessions, booking intents, reservations, payments, refunds, subscriptions, partners and shipments.
+1. Apply the included Supabase migration and extend it with provider reservation, payment ledger, refund, audit and idempotency records.
 2. Add a hotel inventory provider and a tour/operator adapter with normalized availability, local time zones, currency, taxes and cancellation terms.
 3. Add partner onboarding and logistics carrier webhooks with signed event verification and proof-of-delivery records.
 4. Add Testnet subscription and token contracts only after requirements, economics, access control, audit, tests and on-chain readback are complete. Do not imply a token has value or is deployed before verification.
