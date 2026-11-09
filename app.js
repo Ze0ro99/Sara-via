@@ -51,9 +51,9 @@ const $$ = (selector) => Array.from(document.querySelectorAll(selector));  funct
 }
 
 function updateSearchFields(type) {
-    const from = $('#from');
-    const to = $('#to');
-    const departure = $('#departure');
+    const from = $('#departure');
+    const to = $('#destination');
+    const departure = $('#travelDate');
     const guests = $('#guests');
 
     if (!from || !to) return;
@@ -61,8 +61,9 @@ function updateSearchFields(type) {
     const placeholders = {
         hotels: { from: 'City or destination', to: 'Hotel or area', checkin: 'Check-in date' },
         experiences: { from: 'City or destination', to: 'Experience' },
+        cruises: { from: 'Departure port', to: 'Destination port' },
         transport: { from: 'Pickup location', to: 'Drop-off location' },
-        flights: { from: 'City or airport', to: 'Destination', departure: 'Departure date' }
+        flights: { from: 'Origin IATA code (e.g. AMM)', to: 'Destination IATA code (e.g. DXB)', departure: 'Departure date' }
     };
 
     const currentConfig = placeholders[type] || placeholders.flights;
