@@ -21,7 +21,9 @@ async function verifiedPiUser(req, res) {
   } catch { fail(res, 503, 'PI_AUTH_UNAVAILABLE', 'Pi identity service is unavailable.'); return null; }
 }
 function databaseReady(res) {
-  if (!SUPABASE_URL || !SUPABASE_KEY) { fail(res, 503, 'BOOKING_DATABASE_NOT_CONFIGURED', 'Configure SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY to enable persistent booking intents.'); return false; }
+  let secureUrl = false;
+  try { secureUrl = new URL(SUPABASE_URL).protocol === 'https:'; } catch { secureUrl = false; }
+  if (!secureUrl || !SUPABASE_KEY) { fail(res, 503, 'BOOKING_DATABASE_NOT_CONFIGURED', 'Configure SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY to enable persistent booking intents.'); return false; }
   return true;
 }
 async function dbRequest(path, method, body) {
