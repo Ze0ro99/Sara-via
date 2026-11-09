@@ -308,7 +308,7 @@ function initializeNavigation() {
 }
 
 function setMinimumDate() {
-    const input = $('#departure');
+    const input = $('#travelDate');
     if (!input) return;
 
     const today = new Date();
