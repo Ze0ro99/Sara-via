@@ -1,8 +1,14 @@
 # SARA VIA — Pi Network Testnet Travel Platform
 
 <p align="center">
-  <img src="assets/sara-via-logo.svg" alt="SARA VIA — premium travel and logistics" width="100%">
+  <img src="assets/sara-via-symbol.webp" alt="SARA VIA globe and aircraft symbol" width="180">
 </p>
+
+<p align="center">
+  <img src="assets/sara-via-brand-hero.webp.png" alt="SARA VIA — Travel, Book, Explore, Deliver" width="100%">
+</p>
+
+<p align="center"><strong>Travel • Book • Explore • Deliver</strong></p>
 
 SARA VIA is a travel and logistics platform prototype being prepared for **Pi Testnet integration and verification**. It is not a Mainnet release and does not represent live inventory unless a provider is configured and returns current results.
 
