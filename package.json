@@ -10,7 +10,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "test": "node --test",
-    "check:syntax": "node --check server.js && node --check app.js && node --check routes/pi-auth.js && node --check routes/pi-payments.js && node --check routes/travel.js"
+    "check:syntax": "node --check server.js && node --check app.js && node --check routes/pi-auth.js && node --check routes/pi-payments.js && node --check routes/travel.js && node --check routes/bookings.js"
   },
   "engines": {
     "node": ">=20"
