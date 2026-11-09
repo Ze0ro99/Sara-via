@@ -69,11 +69,11 @@ function isValidTxid(value) {
 }
 
 function requireApiKey(res) {
-  if (!PI_API_KEY) {
+  if (!PI_API_KEY || !PI_WALLET_ADDRESS) {
     res.status(503).json({
       success: false,
-      error: 'Pi Server API Key is not configured.',
-      code: 'PI_API_KEY_MISSING'
+      error: !PI_API_KEY ? 'Pi Server API Key is not configured.' : 'SARA VIA Testnet App Wallet address is not configured.',
+      code: !PI_API_KEY ? 'PI_API_KEY_MISSING' : 'PI_WALLET_ADDRESS_MISSING'
     });
 
     return false;
@@ -200,10 +200,7 @@ function verifyPaymentForSaraVia(payment) {
    * This prevents a payment intended for another
    * destination from being treated as a SARA VIA payment.
    */
-  if (
-    PI_WALLET_ADDRESS &&
-    payment.to_address !== PI_WALLET_ADDRESS
-  ) {
+  if (payment.to_address !== PI_WALLET_ADDRESS) {
     return {
       valid: false,
       code: 'INVALID_PAYMENT_RECIPIENT',
@@ -220,7 +217,6 @@ function verifyPaymentForSaraVia(payment) {
    */
   if (
     APP_ENV === 'testnet' &&
-    payment.network &&
     payment.network !== 'Pi Testnet'
   ) {
     return {
@@ -229,6 +225,11 @@ function verifyPaymentForSaraVia(payment) {
       message:
         'Payment network does not match SARA VIA Testnet.'
     };
+  }
+
+  const amount = Number(payment.amount);
+  if (!Number.isFinite(amount) || amount <= 0) {
+    return { valid: false, code: 'INVALID_PAYMENT_AMOUNT', message: 'Payment amount must be a positive finite value.' };
   }
 
   return {
@@ -640,6 +641,10 @@ router.post(
 
       const payment =
         verification.payment;
+
+      if (!payment.status?.developer_approved) {
+        return res.status(409).json({ success: false, completed: false, error: 'Payment has not been approved by the SARA VIA server.', code: 'PAYMENT_NOT_APPROVED' });
+      }
 
       /*
        * Prevent a cancelled payment from being completed.
