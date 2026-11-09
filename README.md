@@ -14,6 +14,7 @@ SARA VIA is a travel and logistics platform prototype being prepared for **Pi Te
 - Fail-closed Pi payment approval and server-confirmed completion; incomplete-payment recovery is routed through the backend.
 - Express API mounted for local use and Netlify Functions.
 - Pi-verified, persistent booking-intent API backed by Supabase REST when configured.
+- Pi-authenticated service-provider application form with review status and no public collection of API keys or wallet seeds.
 - Initial Supabase schema for booking intents, subscriptions, shipments and partner profiles.
 - Flight offer search through the Amadeus **test** API when credentials are supplied.
 - Route calculation through Google Routes API when a server-side key is supplied.
@@ -68,7 +69,7 @@ Service providers register with their Pi-authenticated account and submit their 
 
 ## Booking, hotel, tour and logistics roadmap
 
-The branch now includes a Supabase schema and Pi-verified booking-intent endpoints, but a booking intent is not a confirmed reservation. The database must be provisioned and configured, and provider-side offer validation/booking confirmation, payment-to-booking reconciliation, refunds and durable idempotency are still pending. Hotel, cruise, tour and logistics adapters require real provider contracts and credentials. Subscription state tables exist in the migration, but subscription billing/entitlement APIs are not yet implemented; no SARA VIA token contract is deployed.
+The branch includes a Pi-authenticated provider registration form and application API. New providers submit business details and remain pending review. Their secrets are not requested in the public form. The branch also includes a Supabase schema and Pi-verified booking-intent endpoints, but a booking intent is not a confirmed reservation. The database must be provisioned and configured, and provider-side offer validation/booking confirmation, payment-to-booking reconciliation, refunds and durable idempotency are still pending. Hotel, cruise, tour and logistics adapters require real provider contracts and credentials. Subscription state tables exist in the migration, but subscription billing/entitlement APIs are not yet implemented; no SARA VIA token contract is deployed.
 
 Recommended next implementation stages:
 
