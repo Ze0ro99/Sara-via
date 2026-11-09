@@ -31,7 +31,8 @@ let appState = {
 */
 
 const $ = (selector) => document.querySelector(selector);
-const $$ = (selector) => Array.from(document.querySelectorAll(selector));  function capitalize(value) {     if (!value) return '';     return value.charAt(0).toUpperCase() + value.slice(1); }  function escapeHtml(value) {     return String(value)         .replaceAll('&', '&amp;')         .replaceAll('<', '&lt;')         .replaceAll('>', '&gt;')         .replaceAll('"', '&quot;')         .replaceAll("'", '&#039;'); }  function getErrorMessage(error) {     if (error && typeof error.message === 'string' && error.message.trim()) {         return error.message;     }     return 'Something went wrong. Please try again.'; }   /* \vert{}-------------------------------------------------------------------------- \vert{} Initialization Lifecycle \vert{}-------------------------------------------------------------------------- */  document.addEventListener('DOMContentLoaded', () => {     initializeEnterpriseApp(); });  async function initializeEnterpriseApp() {     try {         setMinimumDate();         initializeTravelTabs();         initializeSearch();         initializeNavigation();         initializePiButton();                  await waitForPiSDK();     } catch (error) {         console.error('[SARA VIA Enterprise] Initialization error:', error);     } }   /* \vert{}-------------------------------------------------------------------------- \vert{} Pi SDK Async Loader \vert{}-------------------------------------------------------------------------- */  async function waitForPiSDK(timeout = 10000) {     const started = Date.now();      while (typeof window.Pi === 'undefined' && Date.now() - started < timeout) {         await new Promise((resolve) => setTimeout(resolve, 100));     }      if (typeof window.Pi === 'undefined') {         console.warn('[SARA VIA Enterprise] Pi SDK unavailable in this environment.');         return false;     }      appState.piReady = true;     console.info('[SARA VIA Enterprise] Pi SDK successfully initialized.');     return true; }   /* \vert{}-------------------------------------------------------------------------- \vert{} UI Components: Travel Tabs & Search Engine \vert{}-------------------------------------------------------------------------- */  function initializeTravelTabs() {     const tabs = Array.from(document.querySelectorAll('.travel-type-tab'));
+const $$ = (selector) => Array.from(document.querySelectorAll(selector));  function capitalize(value) {     if (!value) return '';     return value.charAt(0).toUpperCase() + value.slice(1); }  function escapeHtml(value) {     return String(value)         .replaceAll('&', '&amp;')         .replaceAll('<', '&lt;')         .replaceAll('>', '&gt;')         .replaceAll('"', '&quot;')         .replaceAll("'", '&#039;'); }  function getErrorMessage(error) {     if (error && typeof error.message === 'string' && error.message.trim()) {         return error.message;     }     return 'Something went wrong. Please try again.'; }   /* \vert{}-------------------------------------------------------------------------- \vert{} Initialization Lifecycle \vert{}-------------------------------------------------------------------------- */  document.addEventListener('DOMContentLoaded', () => {     initializeEnterpriseApp(); });  async function initializeEnterpriseApp() {     try {         setMinimumDate();         initializeTravelTabs();         initializeSearch();
+        initializeProviderApplication();         initializeNavigation();         initializePiButton();                  await waitForPiSDK();     } catch (error) {         console.error('[SARA VIA Enterprise] Initialization error:', error);     } }   /* \vert{}-------------------------------------------------------------------------- \vert{} Pi SDK Async Loader \vert{}-------------------------------------------------------------------------- */  async function waitForPiSDK(timeout = 10000) {     const started = Date.now();      while (typeof window.Pi === 'undefined' && Date.now() - started < timeout) {         await new Promise((resolve) => setTimeout(resolve, 100));     }      if (typeof window.Pi === 'undefined') {         console.warn('[SARA VIA Enterprise] Pi SDK unavailable in this environment.');         return false;     }      appState.piReady = true;     console.info('[SARA VIA Enterprise] Pi SDK successfully initialized.');     return true; }   /* \vert{}-------------------------------------------------------------------------- \vert{} UI Components: Travel Tabs & Search Engine \vert{}-------------------------------------------------------------------------- */  function initializeTravelTabs() {     const tabs = Array.from(document.querySelectorAll('.travel-type-tab'));
     if (!tabs.length) return;
 
     tabs.forEach((tab) => {
@@ -116,6 +117,45 @@ async function initializeSearch() {
     });
 }
 
+
+
+function initializeProviderApplication() {
+    const form = $('#providerApplicationForm');
+    const status = $('#providerApplicationStatus');
+    if (!form) return;
+    form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        if (!appState.piConnected || !appState.accessToken) {
+            const auth = await connectPi();
+            if (!auth.success) {
+                if (status) status.textContent = 'Connect your Pi account before submitting.';
+                return;
+            }
+        }
+        const values = Object.fromEntries(new FormData(form).entries());
+        values.countryCode = String(values.countryCode || '').trim().toUpperCase();
+        const submit = form.querySelector('button[type="submit"]');
+        if (submit) submit.disabled = true;
+        if (status) status.textContent = 'Submitting your application securely…';
+        try {
+            const response = await fetch('/api/providers/applications', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + appState.accessToken },
+                body: JSON.stringify(values)
+            });
+            const payload = await response.json();
+            if (!response.ok || !payload.success) throw new Error(payload.error || 'Provider application could not be submitted.');
+            if (status) status.textContent = 'Application received. Our team will review your business details and contact you.';
+            form.reset();
+            showNotification('Provider application submitted for review.', 'success');
+        } catch (error) {
+            if (status) status.textContent = getErrorMessage(error);
+            showNotification(getErrorMessage(error), 'error');
+        } finally {
+            if (submit) submit.disabled = false;
+        }
+    });
+}
 
 /*
 |--------------------------------------------------------------------------
