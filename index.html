@@ -1577,14 +1577,18 @@
 
           try {
 
-            window.Pi.init({
-              version: '2.0',
-              sandbox: true
+            window.__piSdkReady = Promise.resolve(
+              window.Pi.init({
+                version: '2.0',
+                sandbox: true
+              })
+            ).then(() => {
+              document.documentElement.classList.add('pi-sdk-ready');
+              return true;
+            }).catch((error) => {
+              console.error('[SARA VIA] Pi SDK initialization failed:', error);
+              return false;
             });
-
-            document.documentElement.classList.add(
-              'pi-sdk-ready'
-            );
 
           } catch (error) {
 
