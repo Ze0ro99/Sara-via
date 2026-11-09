@@ -94,13 +94,16 @@ async function initializeSearch() {
         const adults = Number($('#guests')?.value || 1);
         if (!origin || !destination) return showNotification('Enter an origin and destination.', 'warning');
         const type = appState.travelType;
-        if (type !== 'flights') {
-            return showNotification('Live inventory for this category is not connected yet. Configure its provider before accepting bookings.', 'warning');
-        }
+        const providerRoutes = { flights: '/api/travel/flights/search', hotels: '/api/travel/providers/hotels/search', cruises: '/api/travel/providers/cruises/search', experiences: '/api/travel/providers/tours/search', transport: '/api/travel/providers/logistics/quote' };
+        const endpoint = providerRoutes[type];
+        if (!endpoint) return showNotification('This category has no configured provider adapter.', 'warning');
+        const requestBody = type === 'flights'
+            ? { origin, destination, departureDate, adults }
+            : { origin, destination, departureDate, guests: adults, category: type };
         const button = form.querySelector('button[type="submit"]');
         if (button) button.disabled = true;
         try {
-            const response = await fetch('/api/travel/flights/search', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ origin, destination, departureDate, adults }) });
+            const response = await fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(requestBody) });
             const payload = await response.json();
             if (!response.ok || !payload.success) throw new Error(payload.error || 'Flight search failed.');
             const status = $('#piStatus');
