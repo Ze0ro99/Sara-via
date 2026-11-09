@@ -16,7 +16,7 @@ async function callGenericProvider(type, action, payload) {
   const provider = genericProviders[type];
   if (!provider?.base || !provider?.key) { const e = new Error(type + ' provider is not configured. Set its server-side base URL and API key.'); e.status = 503; throw e; }
   const base = new URL(provider.base);
-  if (!['https:', 'http:'].includes(base.protocol)) { const e = new Error('Provider URL must use HTTP(S).'); e.status = 500; throw e; }
+  if (base.protocol !== 'https:') { const e = new Error('Provider URL must use HTTP(S).'); e.status = 500; throw e; }
   const response = await fetch(new URL('/' + action, base), { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + provider.key, Accept: 'application/json' }, body: JSON.stringify(payload || {}) });
   return json(response);
 }
@@ -52,7 +52,8 @@ router.post('/flights/search', async (req, res) => {
     const destinationLocationCode = required(req.body?.destination, 'destination').toUpperCase();
     const departureDate = required(req.body?.departureDate, 'departureDate');
     if (!/^[A-Z]{3}$/.test(originLocationCode) || !/^[A-Z]{3}$/.test(destinationLocationCode)) return res.status(400).json({ success: false, error: 'Use valid three-letter IATA airport codes.' });
-    if (!/^\\d{4}-\\d{2}-\\d{2}$/.test(departureDate) || departureDate < new Date().toISOString().slice(0, 10)) return res.status(400).json({ success: false, error: 'departureDate must be a valid future date (YYYY-MM-DD).' });
+    const parsedDate = new Date(departureDate + 'T00:00:00.000Z');
+    if (!/^\\d{4}-\\d{2}-\\d{2}$/.test(departureDate) || Number.isNaN(parsedDate.getTime()) || parsedDate.toISOString().slice(0, 10) !== departureDate || departureDate < new Date().toISOString().slice(0, 10)) return res.status(400).json({ success: false, error: 'departureDate must be a valid future date (YYYY-MM-DD).' });
     const adults = Math.min(9, Math.max(1, Number(req.body?.adults) || 1));
     const token = await amadeusToken();
     const query = new URLSearchParams({ originLocationCode, destinationLocationCode, departureDate, adults: String(adults), currencyCode: 'USD', max: '20' });
