@@ -2998,3 +2998,20 @@ section {
 /* Custom SARA VIA identity mark */
 .brand-mark { display: inline-flex; align-items: center; justify-content: center; overflow: hidden; }
 .brand-mark img { display: block; width: 100%; height: 100%; object-fit: contain; }
+
+
+/* SARA VIA provider onboarding */
+.provider-section { padding: 88px 24px; background: linear-gradient(145deg, #071426, #0b2038); border-top: 1px solid rgba(201,164,92,.22); }
+.provider-section .section-container { max-width: 1120px; margin: 0 auto; }
+.provider-heading { max-width: 760px; margin: 0 auto 36px; text-align: center; }
+.provider-heading h2 { color: #f4e5c4; font-family: 'Playfair Display', Georgia, serif; font-size: clamp(2rem, 4vw, 3.2rem); margin: 14px 0; }
+.provider-heading p { color: #c4d0df; line-height: 1.7; }
+.provider-application-form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; max-width: 900px; margin: 0 auto; padding: 30px; border: 1px solid rgba(201,164,92,.28); border-radius: 22px; background: rgba(3,12,24,.62); }
+.provider-application-form label { display: grid; gap: 8px; color: #ead9b4; font-size: .92rem; }
+.provider-application-form input, .provider-application-form select, .provider-application-form textarea { width: 100%; min-width: 0; padding: 13px 14px; border: 1px solid rgba(201,164,92,.3); border-radius: 10px; background: #09192b; color: #f7f2e7; font: inherit; }
+.provider-application-form input:focus, .provider-application-form select:focus, .provider-application-form textarea:focus { outline: 2px solid #c9a45c; outline-offset: 2px; }
+.provider-description, .provider-security-note, .provider-form-status, .provider-application-form button { grid-column: 1 / -1; }
+.provider-security-note, .provider-form-status { color: #c4d0df; font-size: .88rem; line-height: 1.6; }
+.provider-application-form button { justify-self: start; cursor: pointer; }
+.provider-application-form button:disabled { opacity: .6; cursor: wait; }
+@media (max-width: 680px) { .provider-application-form { grid-template-columns: 1fr; padding: 20px; } .provider-description, .provider-security-note, .provider-form-status, .provider-application-form button { grid-column: 1; } }
