@@ -27,6 +27,7 @@ test('travel providers are server-side and disabled when credentials are absent'
   assert.match(route, /AMADEUS_CLIENT_SECRET/);
   assert.match(route, /GOOGLE_ROUTES_API_KEY/);
   assert.match(route, /HOTEL_PROVIDER_API_KEY/);
+  assert.match(route, /CRUISE_PROVIDER_API_KEY/);
   assert.match(route, /TOUR_PROVIDER_API_KEY/);
   assert.match(route, /LOGISTICS_PROVIDER_API_KEY/);
   assert.match(route, /retrievedAt/);
