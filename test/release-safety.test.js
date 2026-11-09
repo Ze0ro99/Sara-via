@@ -19,6 +19,12 @@ test('Pi payment frontend fails closed and waits for server completion', () => {
   assert.match(app, /payload\.completed/);
   assert.match(app, /verifiedByServer:\s*true/);
   assert.match(app, /querySelectorAll/);
+  assert.match(read('routes/pi-payments.js'), /PI_WALLET_ADDRESS_MISSING/);
+  assert.match(read('routes/pi-payments.js'), /PAYMENT_NOT_APPROVED/);
+  assert.match(read('routes/pi-payments.js'), /payment\.to_address !== PI_WALLET_ADDRESS/);
+  assert.match(read('routes/pi-payments.js'), /payment\.network !== 'Pi Testnet'/);
+  assert.match(read('routes/travel.js'), /\\d\{4\}-\\d\{2\}-\\d\{2\}/);
+  assert.doesNotMatch(read('.env.example'), /YOUR_PI_SERVER_API_KEY_HERE/);
   assert.doesNotMatch(read('index.html'), /onclick="connectPi\(\)"/);
 });
 
@@ -38,6 +44,11 @@ test('booking intents require verified Pi identity and server-only database cred
   assert.match(route, /Authorization: 'Bearer '/);
   assert.match(route, /SUPABASE_SERVICE_ROLE_KEY/);
   assert.match(route, /awaiting_provider_validation/);
+  const providerRoute = read('routes/provider-applications.js');
+  assert.match(providerRoute, /pending_review/);
+  assert.match(providerRoute, /API keys, wallet seeds, passwords and webhook secrets are deliberately not accepted/);
+  assert.match(read('index.html'), /id="providerApplicationForm"/);
+  assert.match(read('app.js'), /\/api\/providers\/applications/);
   assert.doesNotMatch(read('app.js'), /SUPABASE_SERVICE_ROLE_KEY/);
 });
 
