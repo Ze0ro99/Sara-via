@@ -60,4 +60,8 @@ test('Netlify routes API traffic before the SPA fallback', () => {
   const config = read('netlify.toml');
   assert.ok(config.indexOf('from = "/api/*"') < config.indexOf('from = "/*"'));
   assert.match(config, /functions = "netlify\/functions"/);
+  assert.match(read('server.js'), /path\.join\(__dirname, 'dist'\)/);
+  assert.match(read('server.js'), /allowedOrigins/);
+  assert.match(read('README.md'), /assets\/sara-via-logo\.svg/);
+  assert.match(read('index.html'), /__piSdkReady/);
 });
