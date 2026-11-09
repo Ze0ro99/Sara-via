@@ -65,3 +65,20 @@ test('Netlify routes API traffic before the SPA fallback', () => {
   assert.match(read('README.md'), /assets\/sara-via-logo\.svg/);
   assert.match(read('index.html'), /__piSdkReady/);
 });
+
+test('language preference persists and supports Arabic RTL', () => {
+  const locale = read('assets/i18n.js');
+  const html = read('index.html');
+  assert.match(html, /id="languageSelector"/);
+  assert.match(html, /<option value="ar">العربية<\/option>/);
+  assert.match(locale, /localStorage\.setItem\('sara-via-language'/);
+  assert.match(locale, /document\.documentElement\.dir = lang === 'ar' \? 'rtl' : 'ltr'/);
+  assert.match(read('app.js'), /SaraViaI18n\.init\(\)/);
+});
+
+test('Pi SDK follows the official v2 sandbox initialization contract', () => {
+  const html = read('index.html');
+  assert.match(html, /https:\/\/sdk\.minepi\.com\/pi-sdk\.js/);
+  assert.match(html, /Pi\.init\(\{ version: '2\.0', sandbox: true \}\)/);
+  assert.match(read('app.js'), /window\.Pi\.authenticate\(scopes, onIncompletePaymentFound\)/);
+});
