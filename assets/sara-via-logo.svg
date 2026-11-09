@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="560" viewBox="0 0 1600 560" role="img" aria-labelledby="title desc">
+<title id="title">SARA VIA — Travel beyond boundaries</title>
+<desc id="desc">A premium navy and gold travel brand mark with a globe, sweeping flight path and airplane.</desc>
+<defs>
+ <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#071426"/><stop offset=".55" stop-color="#0a2340"/><stop offset="1" stop-color="#030b16"/></linearGradient>
+ <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff0bd"/><stop offset=".28" stop-color="#e7c477"/><stop offset=".68" stop-color="#b9873d"/><stop offset="1" stop-color="#f8dfa0"/></linearGradient>
+ <radialGradient id="globe" cx=".36" cy=".25" r=".8"><stop stop-color="#17456c"/><stop offset=".7" stop-color="#0b213b"/><stop offset="1" stop-color="#071321"/></radialGradient>
+ <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+ <clipPath id="clip"><circle cx="300" cy="270" r="168"/></clipPath>
+</defs>
+<rect width="1600" height="560" rx="36" fill="url(#bg)"/>
+<path d="M40 468H1560" stroke="#c9a45c" stroke-opacity=".32"/>
+<g transform="translate(30 0)">
+ <circle cx="300" cy="270" r="178" fill="none" stroke="url(#gold)" stroke-width="3" opacity=".9"/>
+ <circle cx="300" cy="270" r="168" fill="url(#globe)" stroke="#d9b76c" stroke-opacity=".5" stroke-width="2"/>
+ <g clip-path="url(#clip)" fill="none" stroke="#d8b46b" stroke-opacity=".45">
+  <ellipse cx="300" cy="270" rx="72" ry="168" stroke-width="2"/>
+  <ellipse cx="300" cy="270" rx="132" ry="168" stroke-width="1.5"/>
+  <ellipse cx="300" cy="270" rx="168" ry="62" stroke-width="2"/>
+  <ellipse cx="300" cy="270" rx="168" ry="116" stroke-width="1.5"/>
+  <path d="M132 270H468M300 102V438"/>
+  <path d="M188 150Q300 215 412 150M188 390Q300 325 412 390"/>
+ </g>
+ <path d="M190 204c28-38 70-59 112-55 25 2 48 15 60 35 13 21 7 44-10 58-14 12-34 17-52 23-32 11-61 32-71 64-9 28 4 57 28 72 32 19 76 13 101-13" fill="none" stroke="url(#gold)" stroke-width="24" stroke-linecap="round" filter="url(#glow)"/>
+ <path d="M110 325C190 92 405 62 488 148" fill="none" stroke="url(#gold)" stroke-width="4" stroke-linecap="round" stroke-dasharray="8 13"/>
+ <g transform="translate(470 118) rotate(-18)" fill="url(#gold)" filter="url(#glow)">
+  <path d="M0 16 92 0 57 28 40 67 29 68 35 33 0 16Z"/>
+ </g>
+ <circle cx="300" cy="270" r="184" fill="none" stroke="#e9cb83" stroke-opacity=".25" stroke-width="1"/>
+</g>
+<g transform="translate(570 0)">
+ <text x="0" y="258" fill="url(#gold)" font-family="Georgia, 'Times New Roman', serif" font-size="126" letter-spacing="12">SARA VIA</text>
+ <path d="M5 294H860" stroke="url(#gold)" stroke-width="2" opacity=".85"/>
+ <text x="7" y="352" fill="#f5e4bd" font-family="Arial, sans-serif" font-size="28" letter-spacing="8">TRAVEL  •  BOOK  •  EXPLORE  •  DELIVER</text>
+ <text x="7" y="415" fill="#c7d5e5" font-family="Georgia, serif" font-style="italic" font-size="28">Your complete journey, thoughtfully connected.</text>
+ <g transform="translate(0 475)" fill="none" stroke="url(#gold)" stroke-width="2">
+  <path d="M0 0H850" opacity=".3"/>
+  <path d="M18 0h30m70 0h30m70 0h30m70 0h30m70 0h30m70 0h30m70 0h30m70 0h30m70 0h30m70 0h30"/>
+ </g>
+ <text x="7" y="520" fill="#d7b76f" font-family="Arial, sans-serif" font-size="17" letter-spacing="4">FLIGHTS  •  STAYS  •  EXPERIENCES  •  LOGISTICS</text>
+</g>
+</svg>
