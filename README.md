@@ -36,7 +36,7 @@ Open `http://localhost:3000`. For Pi authentication and payments, use the Pi Bro
 
 ## Environment variables
 
-Apply [`supabase/migrations/001_initial_testnet_schema.sql`](supabase/migrations/001_initial_testnet_schema.sql) to your Supabase Testnet project before enabling booking intents. See [`.env.example`](.env.example). Flight search requires `AMADEUS_CLIENT_ID` and `AMADEUS_CLIENT_SECRET` from an Amadeus test account. Route calculation requires `GOOGLE_ROUTES_API_KEY`. The keys are read only by server code.
+Apply [`supabase/migrations/001_initial_testnet_schema.sql`](supabase/migrations/001_initial_testnet_schema.sql) and [`supabase/migrations/002_service_provider_onboarding.sql`](supabase/migrations/002_service_provider_onboarding.sql) to your Supabase Testnet project before enabling bookings or provider applications. See [`.env.example`](.env.example) and the [Testnet developer handoff](docs/DEVELOPER_HANDOFF_TESTNET.md) for the exact credentials, secret-handling rules and provider onboarding requirements. Flight search requires `AMADEUS_CLIENT_ID` and `AMADEUS_CLIENT_SECRET` from an Amadeus test account. Route calculation requires `GOOGLE_ROUTES_API_KEY`. The keys are read only by server code.
 
 ## API endpoints
 
@@ -54,6 +54,8 @@ Apply [`supabase/migrations/001_initial_testnet_schema.sql`](supabase/migrations
 | POST | `/api/travel/providers/logistics/quote` | Configured transfer/logistics quote |
 | POST | `/api/travel/providers/logistics/track` | Configured carrier tracking |
 | POST | `/api/bookings/intents` | Create a Pi-verified booking intent (not a reservation confirmation) |
+| POST | `/api/providers/applications` | Submit a Pi-authenticated provider application |
+| GET | `/api/providers/applications/me` | Read own provider applications |
 | GET | `/api/bookings/intents/:id` | Read own booking intent |
 | POST | `/api/bookings/intents/:id/cancel` | Cancel an unvalidated intent |
 | GET | `/api/auth/me` | Verify Pi access token |
