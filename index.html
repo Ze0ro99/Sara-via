@@ -152,15 +152,7 @@
 
         <div class="header-actions">
 
-          <button
-            type="button"
-            class="language-selector"
-            id="languageSelector"
-            aria-label="Select language"
-          >
-            <span>EN</span>
-            <span class="language-chevron">⌄</span>
-          </button>
+          <label class="language-control" for="languageSelector"><span class="visually-hidden">Preferred language</span><select class="language-selector" id="languageSelector" aria-label="Preferred language"><option value="en">English</option><option value="ar">العربية</option></select></label>
 
           <button
             type="button"
@@ -1597,7 +1589,7 @@
 
   </script>
 
-  <script type="module" src="/app.js"></script>
+  <script src="/assets/i18n.js"></script>\n  <script type="module" src="/app.js"></script>
 
 </body>
 </html>
