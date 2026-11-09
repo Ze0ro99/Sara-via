@@ -11,6 +11,7 @@ const piAuthRouter = require('./routes/pi-auth');
 const piPaymentsRouter = require('./routes/pi-payments');
 const travelRouter = require('./routes/travel');
 const bookingsRouter = require('./routes/bookings');
+const providerApplicationsRouter = require('./routes/provider-applications');
 
 const app = express();
 
@@ -170,6 +171,7 @@ app.use(
 
 app.use('/api/travel', travelRouter);
 app.use('/api/bookings', bookingsRouter);
+app.use('/api/providers', providerApplicationsRouter);
 
 /*
 |--------------------------------------------------------------------------
