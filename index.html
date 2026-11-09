@@ -1372,6 +1372,29 @@
 
       </section>
 
+
+
+      <section class="provider-section" id="providers">
+        <div class="section-container">
+          <div class="provider-heading">
+            <span class="section-kicker">PARTNER WITH SARA VIA</span>
+            <h2>Bring your service to a world of travelers.</h2>
+            <p>Airlines, hotels, cruise operators, tour professionals and logistics providers can apply to join the SARA VIA network. Every application is reviewed before integration is enabled.</p>
+          </div>
+          <form id="providerApplicationForm" class="provider-application-form">
+            <label>Legal business name<input name="legalName" autocomplete="organization" maxlength="180" required placeholder="Registered business name"></label>
+            <label>Service category<select name="serviceType" required><option value="">Choose a service</option><option value="airline">Airline</option><option value="hotel">Hotel / accommodation</option><option value="cruise">Cruise operator</option><option value="tour_operator">Tour operator / experiences</option><option value="transfer">Airport transfer</option><option value="logistics">Logistics / delivery</option></select></label>
+            <label>Country code<input name="countryCode" maxlength="2" pattern="[A-Za-z]{2}" required placeholder="JO" autocomplete="country"></label>
+            <label>Business contact email<input name="contactEmail" type="email" maxlength="254" required placeholder="partnerships@example.com" autocomplete="email"></label>
+            <label>Website (optional)<input name="websiteUrl" type="url" maxlength="500" placeholder="https://example.com"></label>
+            <label class="provider-description">Describe your services<textarea name="description" maxlength="2000" rows="4" required placeholder="Tell us about your service, locations and booking capabilities."></textarea></label>
+            <p class="provider-security-note">Connect Pi to submit your application. API keys, passwords, wallet seeds and webhook secrets are never requested in this form. Approved providers receive secure integration instructions after review.</p>
+            <button class="primary-button" type="submit">Submit provider application <span>→</span></button>
+            <p id="providerApplicationStatus" class="provider-form-status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
+
     </main>
 
 
