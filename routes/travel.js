@@ -54,7 +54,7 @@ router.post('/flights/search', async (req, res) => {
     const departureDate = required(req.body?.departureDate, 'departureDate');
     if (!/^[A-Z]{3}$/.test(originLocationCode) || !/^[A-Z]{3}$/.test(destinationLocationCode)) return res.status(400).json({ success: false, error: 'Use valid three-letter IATA airport codes.' });
     const parsedDate = new Date(departureDate + 'T00:00:00.000Z');
-    if (!/^\\d{4}-\\d{2}-\\d{2}$/.test(departureDate) || Number.isNaN(parsedDate.getTime()) || parsedDate.toISOString().slice(0, 10) !== departureDate || departureDate < new Date().toISOString().slice(0, 10)) return res.status(400).json({ success: false, error: 'departureDate must be a valid future date (YYYY-MM-DD).' });
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(departureDate) || Number.isNaN(parsedDate.getTime()) || parsedDate.toISOString().slice(0, 10) !== departureDate || departureDate < new Date().toISOString().slice(0, 10)) return res.status(400).json({ success: false, error: 'departureDate must be a valid future date (YYYY-MM-DD).' });
     const adults = Math.min(9, Math.max(1, Number(req.body?.adults) || 1));
     const token = await amadeusToken();
     const query = new URLSearchParams({ originLocationCode, destinationLocationCode, departureDate, adults: String(adults), currencyCode: 'USD', max: '20' });
