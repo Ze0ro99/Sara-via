@@ -20,7 +20,7 @@ SARA VIA is a travel and logistics platform prototype being prepared for **Pi Te
 - Route calculation through Google Routes API when a server-side key is supplied.
 - Provider status endpoint: `GET /api/travel/status`.
 
-## Run locally
+## Language selection\n\nThe interface includes a persistent English/Arabic language selector. The selected language is saved in the browser, and Arabic switches the document to right-to-left direction. Additional translations can be added in `assets/i18n.js`.\n\n## Pi SDK integration\n\nThe frontend loads the official Pi SDK from `https://sdk.minepi.com/pi-sdk.js` and initializes `Pi.init({ version: "2.0", sandbox: true })` before authentication or payment calls. Authentication requests only the `username` and `payments` scopes used by this app; the backend verifies the access token through the Platform API and owns payment approval/completion. Review the [official Pi Getting Started guide](https://developers.minepi.com/docs/build-first-app/GettingStarted), [Build an App guide](https://developers.minepi.com/docs/build-first-app/BuildAnApp), and [Client SDK reference](https://developers.minepi.com/docs/api-reference/SdkReference) before deployment.\n\n## Run locally
 
 Requires Node.js 20 or later.
 
