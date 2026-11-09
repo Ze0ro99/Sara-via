@@ -18,6 +18,8 @@ test('Pi payment frontend fails closed and waits for server completion', () => {
   assert.match(app, /\/api\/payments\/complete/);
   assert.match(app, /payload\.completed/);
   assert.match(app, /verifiedByServer:\s*true/);
+  assert.match(app, /querySelectorAll/);
+  assert.doesNotMatch(read('index.html'), /onclick="connectPi\(\)"/);
 });
 
 test('travel providers are server-side and disabled when credentials are absent', () => {
