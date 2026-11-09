@@ -106,9 +106,11 @@ async function initializeSearch() {
             const response = await fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(requestBody) });
             const payload = await response.json();
             if (!response.ok || !payload.success) throw new Error(payload.error || 'Flight search failed.');
+            const results = payload.results ?? payload.quote ?? payload.tracking ?? [];
+            const resultCount = Array.isArray(results) ? results.length : (results ? 1 : 0);
             const status = $('#piStatus');
-            if (status) status.textContent = payload.results.length ? JSON.stringify(payload.results, null, 2) : 'No flights returned by the configured provider.';
-            showNotification(payload.results.length + ' provider flight offers retrieved.', 'success');
+            if (status) status.textContent = resultCount ? JSON.stringify(results, null, 2) : 'The configured provider returned no results.';
+            showNotification(resultCount + ' provider result(s) retrieved.', 'success');
         } catch (error) { showNotification(getErrorMessage(error), 'error'); }
         finally { if (button) button.disabled = false; }
     });
