@@ -1566,43 +1566,30 @@
      * in the separate production application.
      */
 
-    window.addEventListener(
-      'load',
-      function () {
-
-        if (
-          window.Pi &&
-          typeof window.Pi.init === 'function'
-        ) {
-
-          try {
-
-            window.__piSdkReady = Promise.resolve(
-              window.Pi.init({
-                version: '2.0',
-                sandbox: true
-              })
-            ).then(() => {
-              document.documentElement.classList.add('pi-sdk-ready');
-              return true;
-            }).catch((error) => {
-              console.error('[SARA VIA] Pi SDK initialization failed:', error);
-              return false;
-            });
-
-          } catch (error) {
-
-            console.error(
-              '[SARA VIA] Pi SDK initialization failed:',
-              error
-            );
-
-          }
-
+    (function initializePiSdk() {
+      const initialize = () => {
+        if (!window.Pi || typeof window.Pi.init !== 'function') {
+          window.__piSdkReady = Promise.resolve(false);
+          return;
         }
-
-      }
-    );
+        try {
+          window.__piSdkReady = Promise.resolve(
+            window.Pi.init({ version: '2.0', sandbox: true })
+          ).then(() => {
+            document.documentElement.classList.add('pi-sdk-ready');
+            return true;
+          }).catch((error) => {
+            console.error('[SARA VIA] Pi SDK initialization failed:', error);
+            return false;
+          });
+        } catch (error) {
+          console.error('[SARA VIA] Pi SDK initialization failed:', error);
+          window.__piSdkReady = Promise.resolve(false);
+        }
+      };
+      if (window.Pi) initialize();
+      else window.addEventListener('load', initialize, { once: true });
+    })();
 
   </script>
 
