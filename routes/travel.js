@@ -7,6 +7,20 @@ const AMADEUS_BASE = process.env.AMADEUS_BASE_URL || 'https://test.api.amadeus.c
 const GOOGLE_ROUTES_KEY = process.env.GOOGLE_ROUTES_API_KEY || '';
 const GOOGLE_ROUTES_URL = 'https://routes.googleapis.com/directions/v2:computeRoutes';
 let tokenCache = { value: null, expiresAt: 0 };
+const genericProviders = {
+  hotels: { base: process.env.HOTEL_PROVIDER_BASE_URL, key: process.env.HOTEL_PROVIDER_API_KEY },
+  tours: { base: process.env.TOUR_PROVIDER_BASE_URL, key: process.env.TOUR_PROVIDER_API_KEY },
+  logistics: { base: process.env.LOGISTICS_PROVIDER_BASE_URL, key: process.env.LOGISTICS_PROVIDER_API_KEY }
+};
+async function callGenericProvider(type, action, payload) {
+  const provider = genericProviders[type];
+  if (!provider?.base || !provider?.key) { const e = new Error(type + ' provider is not configured. Set its server-side base URL and API key.'); e.status = 503; throw e; }
+  const base = new URL(provider.base);
+  if (!['https:', 'http:'].includes(base.protocol)) { const e = new Error('Provider URL must use HTTP(S).'); e.status = 500; throw e; }
+  const response = await fetch(new URL('/' + action, base), { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + provider.key, Accept: 'application/json' }, body: JSON.stringify(payload || {}) });
+  return json(response);
+}
+
 
 function required(value, name) {
   if (typeof value !== 'string' || !value.trim()) {
@@ -30,7 +44,7 @@ async function amadeusToken() {
   return tokenCache.value;
 }
 
-router.get('/status', (req, res) => res.json({ success: true, environment: 'testnet', providers: { flights: Boolean(process.env.AMADEUS_CLIENT_ID && process.env.AMADEUS_CLIENT_SECRET), maps: Boolean(GOOGLE_ROUTES_KEY), hotels: false, tours: false, logistics: false }, note: 'Unconfigured providers are disabled; no demo inventory is presented as live.' }));
+router.get('/status', (req, res) => res.json({ success: true, environment: 'testnet', providers: { flights: Boolean(process.env.AMADEUS_CLIENT_ID && process.env.AMADEUS_CLIENT_SECRET), maps: Boolean(GOOGLE_ROUTES_KEY), hotels: Boolean(genericProviders.hotels.base && genericProviders.hotels.key), tours: Boolean(genericProviders.tours.base && genericProviders.tours.key), logistics: Boolean(genericProviders.logistics.base && genericProviders.logistics.key) }, note: 'Unconfigured providers are disabled; no demo inventory is presented as live.' }));
 
 router.post('/flights/search', async (req, res) => {
   try {
@@ -56,6 +70,24 @@ router.post('/routes/compute', async (req, res) => {
     const data = await json(response);
     return res.json({ success: true, provider: 'Google Routes API', retrievedAt: new Date().toISOString(), routes: data.routes || [] });
   } catch (error) { return res.status(error.status || 502).json({ success: false, code: 'ROUTE_COMPUTE_FAILED', error: error.message }); }
+});
+
+
+router.post('/providers/:type/search', async (req, res) => {
+  const type = req.params.type;
+  if (!['hotels', 'tours'].includes(type)) return res.status(404).json({ success: false, error: 'Unknown inventory provider.' });
+  try {
+    const data = await callGenericProvider(type, 'search', req.body);
+    return res.json({ success: true, provider: type, retrievedAt: new Date().toISOString(), results: data.results || data.data || data });
+  } catch (error) { return res.status(error.status || 502).json({ success: false, code: type.toUpperCase() + '_SEARCH_FAILED', error: error.message }); }
+});
+router.post('/providers/logistics/quote', async (req, res) => {
+  try { const data = await callGenericProvider('logistics', 'quote', req.body); return res.json({ success: true, provider: 'logistics', retrievedAt: new Date().toISOString(), quote: data.quote || data }); }
+  catch (error) { return res.status(error.status || 502).json({ success: false, code: 'LOGISTICS_QUOTE_FAILED', error: error.message }); }
+});
+router.post('/providers/logistics/track', async (req, res) => {
+  try { const trackingNumber = required(req.body?.trackingNumber, 'trackingNumber'); const data = await callGenericProvider('logistics', 'track', { trackingNumber }); return res.json({ success: true, provider: 'logistics', retrievedAt: new Date().toISOString(), tracking: data.tracking || data }); }
+  catch (error) { return res.status(error.status || 502).json({ success: false, code: 'LOGISTICS_TRACK_FAILED', error: error.message }); }
 });
 
 module.exports = router;
