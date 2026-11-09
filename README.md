@@ -1,10 +1,14 @@
 # SARA VIA — Pi Network Testnet Travel Platform
 
+<p align="center">
+  <img src="assets/sara-via-logo.svg" alt="SARA VIA — premium travel and logistics" width="100%">
+</p>
+
 SARA VIA is a travel and logistics platform prototype being prepared for **Pi Testnet integration and verification**. It is not a Mainnet release and does not represent live inventory unless a provider is configured and returns current results.
 
 ## Current capabilities in this branch
 
-- Luxury navy-and-gold identity with a custom SVG monogram.
+- Luxury navy-and-gold identity with a original SVG logo and app mark.
 - Pi SDK initialization in sandbox mode.
 - Server-side Pi user verification through `/api/auth/me`.
 - Fail-closed Pi payment approval and server-confirmed completion; incomplete-payment recovery is routed through the backend.
@@ -28,7 +32,7 @@ npm run build
 npm start
 ```
 
-Open `http://localhost:3000`. For Pi authentication and payments, use the Pi Browser Testnet environment and configure a Testnet Server API key. Never expose provider keys or Pi server keys in frontend code.
+Open `http://localhost:3000`. For Pi authentication and payments, use the Pi Browser Testnet environment and configure a Testnet Server API key. Never expose provider keys or Pi server keys in frontend code. Use `.env.example` only as a variable-name template; replace every blank with credentials issued by the relevant provider in your deployment's encrypted environment settings.
 
 ## Environment variables
 
@@ -55,6 +59,10 @@ Apply [`supabase/migrations/001_initial_testnet_schema.sql`](supabase/migrations
 | GET | `/api/auth/me` | Verify Pi access token |
 | POST | `/api/payments/approve` | Verify and approve Pi payment |
 | POST | `/api/payments/complete` | Verify and complete Pi payment |
+
+## Service provider registration and credentials
+
+Service providers register with their Pi-authenticated account and submit their legal business name, service category, country, contact email, website and service description. Applications remain pending review until an administrator approves them. API keys and webhook secrets are **not** collected in the public registration form or stored in plaintext database columns. After KYB/review, an administrator provisions each provider integration through an approved secret manager and stores only a secret reference in the application database. See [`docs/DEVELOPER_HANDOFF_TESTNET.md`](docs/DEVELOPER_HANDOFF_TESTNET.md).
 
 ## Booking, hotel, tour and logistics roadmap
 
