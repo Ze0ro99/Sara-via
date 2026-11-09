@@ -5,16 +5,24 @@
 </p>
 
 <p align="center">
-  <img src="assets/sara-via-brand-hero.webp.png" alt="SARA VIA — Travel, Book, Explore, Deliver" width="100%">
+  <img src="assets/sara-via-brand-hero.png" alt="SARA VIA — Travel, Book, Explore, Deliver" width="100%">
 </p>
 
 <p align="center"><strong>Travel • Book • Explore • Deliver</strong></p>
 
 SARA VIA is a travel and logistics platform prototype being prepared for **Pi Testnet integration and verification**. It is not a Mainnet release and does not represent live inventory unless a provider is configured and returns current results.
 
+## Brand system
+
+- **Primary symbol:** [SARA VIA globe and aircraft mark](assets/sara-via-mark.svg), used for the website header and browser favicon.
+- **Brand artwork:** [SARA VIA hero artwork](assets/sara-via-brand-hero.png), used for the README banner and social-sharing preview.
+- **Compact raster symbol:** [SARA VIA symbol](assets/sara-via-symbol.webp), available for app tiles and supported surfaces.
+- **Palette:** deep navy with restrained champagne-gold accents; maintain accessible contrast and clear space around the mark.
+- **Brand separation:** Pi is shown only where the app describes Pi Network integration or payment. The SARA VIA identity is independent and must not imply official Pi Network endorsement.
+
 ## Current capabilities in this branch
 
-- Luxury navy-and-gold identity with original SVG brand assets.
+- Consistent SARA VIA globe-and-aircraft identity across the README, website header, favicon and social preview.
 - Pi SDK initialization in sandbox mode.
 - Server-side Pi user verification through `/api/auth/me`.
 - Fail-closed Pi payment approval and server-confirmed completion; incomplete-payment recovery is routed through the backend.
