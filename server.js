@@ -47,12 +47,8 @@ app.use(
   })
 );
 
-app.use(
-  cors({
-    origin: true,
-    credentials: true
-  })
-);
+const allowedOrigins = (process.env.CORS_ORIGIN || '').split(',').map(value => value.trim()).filter(Boolean);
+app.use(cors({ origin: allowedOrigins.length ? allowedOrigins : false, credentials: true }));
 
 app.use(
   express.json({
@@ -184,15 +180,9 @@ app.use('/api/bookings', bookingsRouter);
 |--------------------------------------------------------------------------
 */
 
-app.use(
-  express.static(
-    path.join(__dirname),
-    {
-      extensions: ['html'],
-      index: 'index.html'
-    }
-  )
-);
+if (!process.env.NETLIFY) {
+  app.use(express.static(path.join(__dirname, 'dist'), { extensions: ['html'], index: 'index.html', dotfiles: 'deny' }));
+}
 
 /*
 |--------------------------------------------------------------------------
@@ -202,7 +192,7 @@ app.use(
 
 app.get('/', (req, res) => {
   res.sendFile(
-    path.join(__dirname, 'index.html')
+    path.join(__dirname, 'dist', 'index.html')
   );
 });
 
