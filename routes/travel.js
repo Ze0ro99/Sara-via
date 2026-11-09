@@ -9,6 +9,7 @@ const GOOGLE_ROUTES_URL = 'https://routes.googleapis.com/directions/v2:computeRo
 let tokenCache = { value: null, expiresAt: 0 };
 const genericProviders = {
   hotels: { base: process.env.HOTEL_PROVIDER_BASE_URL, key: process.env.HOTEL_PROVIDER_API_KEY },
+  cruises: { base: process.env.CRUISE_PROVIDER_BASE_URL, key: process.env.CRUISE_PROVIDER_API_KEY },
   tours: { base: process.env.TOUR_PROVIDER_BASE_URL, key: process.env.TOUR_PROVIDER_API_KEY },
   logistics: { base: process.env.LOGISTICS_PROVIDER_BASE_URL, key: process.env.LOGISTICS_PROVIDER_API_KEY }
 };
@@ -44,7 +45,7 @@ async function amadeusToken() {
   return tokenCache.value;
 }
 
-router.get('/status', (req, res) => res.json({ success: true, environment: 'testnet', providers: { flights: Boolean(process.env.AMADEUS_CLIENT_ID && process.env.AMADEUS_CLIENT_SECRET), maps: Boolean(GOOGLE_ROUTES_KEY), hotels: Boolean(genericProviders.hotels.base && genericProviders.hotels.key), tours: Boolean(genericProviders.tours.base && genericProviders.tours.key), logistics: Boolean(genericProviders.logistics.base && genericProviders.logistics.key) }, note: 'Unconfigured providers are disabled; no demo inventory is presented as live.' }));
+router.get('/status', (req, res) => res.json({ success: true, environment: 'testnet', providers: { flights: Boolean(process.env.AMADEUS_CLIENT_ID && process.env.AMADEUS_CLIENT_SECRET), maps: Boolean(GOOGLE_ROUTES_KEY), hotels: Boolean(genericProviders.hotels.base && genericProviders.hotels.key), cruises: Boolean(genericProviders.cruises.base && genericProviders.cruises.key), tours: Boolean(genericProviders.tours.base && genericProviders.tours.key), logistics: Boolean(genericProviders.logistics.base && genericProviders.logistics.key) }, note: 'Unconfigured providers are disabled; no demo inventory is presented as live.' }));
 
 router.post('/flights/search', async (req, res) => {
   try {
@@ -76,7 +77,7 @@ router.post('/routes/compute', async (req, res) => {
 
 router.post('/providers/:type/search', async (req, res) => {
   const type = req.params.type;
-  if (!['hotels', 'tours'].includes(type)) return res.status(404).json({ success: false, error: 'Unknown inventory provider.' });
+  if (!['hotels', 'tours', 'cruises'].includes(type)) return res.status(404).json({ success: false, error: 'Unknown inventory provider.' });
   try {
     const data = await callGenericProvider(type, 'search', req.body);
     return res.json({ success: true, provider: type, retrievedAt: new Date().toISOString(), results: data.results || data.data || data });
