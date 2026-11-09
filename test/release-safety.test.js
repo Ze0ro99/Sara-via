@@ -33,6 +33,14 @@ test('travel providers are server-side and disabled when credentials are absent'
   assert.match(route, /retrievedAt/);
 });
 
+test('booking intents require verified Pi identity and server-only database credentials', () => {
+  const route = read('routes/bookings.js');
+  assert.match(route, /Authorization: 'Bearer '/);
+  assert.match(route, /SUPABASE_SERVICE_ROLE_KEY/);
+  assert.match(route, /awaiting_provider_validation/);
+  assert.doesNotMatch(read('app.js'), /SUPABASE_SERVICE_ROLE_KEY/);
+});
+
 test('Netlify routes API traffic before the SPA fallback', () => {
   const config = read('netlify.toml');
   assert.ok(config.indexOf('from = "/api/*"') < config.indexOf('from = "/*"'));
